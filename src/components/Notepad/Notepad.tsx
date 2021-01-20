@@ -1,7 +1,7 @@
 import React, {FunctionComponent} from 'react'
 import { Link } from 'react-router-dom'
 import style from './Notepad.module.css'
-import {NodepadRow} from "./NodepadRow";
+import {NodepadRowContainer} from "./NodepadRow";
 
 interface propsType {
     date: string
@@ -17,7 +17,7 @@ export const Notepad: FunctionComponent<propsType> = ({date}) => {
                 <div className={style.title}>
                     {date}
                 </div>
-                {hours.map(hour => <NodepadRow hour={hour}/>)}
+                {hours.map(hour => <NodepadRowContainer key={hour} hour={hour} date={date}/>)}
             </div>
         </div>
     )

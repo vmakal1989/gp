@@ -2,8 +2,13 @@
 export interface elementsOfDayType {
     name: string
     number: number | string
-    note: number
     current: boolean
     isHoliday: boolean
     date: string
+}
+
+export interface noteType {
+    date: string
+    time: string
+    value: string
 }

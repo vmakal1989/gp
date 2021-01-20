@@ -1,10 +1,10 @@
-import {combineReducers, createStore, applyMiddleware} from 'redux'
-import {notes_reducer} from './notes-reducer'
-import thunkMiddleware from 'redux-thunk'
+import {combineReducers, createStore} from 'redux'
+import {notesReducer} from './notes-reducer'
 
 const reducers: any = combineReducers({
-    notes: notes_reducer
+    notes: notesReducer
 })
 
-const store = createStore(reducers, applyMiddleware(thunkMiddleware))
+const store = createStore(reducers)
+
 export default store

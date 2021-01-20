@@ -3,7 +3,6 @@ import './App.css'
 import {Navbar} from "./components/Navbar/Navbar"
 import { Month } from './components/Periods/Month/Month'
 import {Week} from "./components/Periods/Week/Week"
-import {Year} from "./components/Periods/Year/Year"
 import {Notepad} from "./components/Notepad/Notepad"
 import {Route, BrowserRouter, withRouter} from "react-router-dom";
 import {Provider} from "react-redux";
@@ -20,7 +19,7 @@ const App: FunctionComponent<any> = (props) => {
         setCurrentPeriod(type)
     }
     const renderPeriod = (): JSX.Element => {
-        return currentPeriod === 'week' ? <Week /> : currentPeriod === 'month' ? <Month /> : <Year />
+        return currentPeriod === 'week' ? <Week /> : <Month />
     }
     return (
     <div className='app'>
