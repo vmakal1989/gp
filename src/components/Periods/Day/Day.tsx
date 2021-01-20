@@ -5,16 +5,11 @@ import { Link } from 'react-router-dom';
 import { elementsOfDayType } from '../../../types/types';
 import { connect } from 'react-redux';
 
-interface dayProps {
+type dayProps ={
     day: elementsOfDayType
-    key: string
     notes: number
 }
-interface dayContainerType {
-    day: elementsOfDayType
-}
-
-const Day: FunctionComponent<dayProps> = ({day, key, notes}) => {
+const Day: FunctionComponent<dayProps> = ({day, notes}) => {
     return (
         <Link to={'/notepad/'+ day.date} >
             <div className={classNames([style.item, day.current ? style.current : ''])}>
@@ -26,16 +21,15 @@ const Day: FunctionComponent<dayProps> = ({day, key, notes}) => {
     )
 }
 
-const getNumberOfNotes = (notes, date): number => {
+const getNumberOfNotes = (notes :Array<elementsOfDayType>, date: string): number => {
     let notesFilter = notes.filter(note => note.date === date)
-    debugger
     return notesFilter.length
 }
 
-const mapStateToProps = (state, {day}) => {
+const mapStateToProps = (state, {day}): Object => {
     return {
         notes: getNumberOfNotes(state.notes, day.date)
     }
 }
 
-export const DayContainer: any = connect(mapStateToProps, null)(Day)
+export const DayContainer: FunctionComponent<any> = connect(mapStateToProps, '')(Day)
