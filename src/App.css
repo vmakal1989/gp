@@ -3,4 +3,18 @@
     max-width: 1200px;
     height: 100%;
     margin: 0 auto;
+    position: relative;
+}
+
+.dates__popup {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    opacity: 0;
+    transition: opacity .2s;
+}
+
+.dates__popup_active {
+    opacity: 1;
+    z-index: 99;
 }

@@ -4,11 +4,13 @@ import classNames from "classnames";
 import { Link } from 'react-router-dom';
 
 interface navbarProps {
-	currentPeriod: string,
+	currentPeriod: string
 	toggleCurrentPeriod: (type: string) => void
+	setShowSelectedDates: (type: boolean) => void
+	showSelectedDates: boolean
 }
 
-export const Navbar: FunctionComponent<navbarProps> = ({currentPeriod, toggleCurrentPeriod}) => {
+export const Navbar: FunctionComponent<navbarProps> = ({currentPeriod, toggleCurrentPeriod, setShowSelectedDates,showSelectedDates}) => {
 	return (
 		<nav className={style.container}>
 			<ul className={style.items}>
@@ -18,9 +20,10 @@ export const Navbar: FunctionComponent<navbarProps> = ({currentPeriod, toggleCur
 				<Link to="/" >
 					<li className={classNames([style.item, currentPeriod === 'month' ? style.item_current : ''])} onClick={ () => toggleCurrentPeriod('month')}>28 days</li>
 				</Link>
-				<Link to="/" >
-					<li className={classNames([style.item, currentPeriod === 'year' ? style.item_current : ''])} onClick={ () => toggleCurrentPeriod('year')}>a year</li>
-				</Link>
+					<li className={classNames([style.item, currentPeriod === 'show notes' ? style.item_current : '',showSelectedDates ? style.item_focus : ''])}
+						onClick={() => setShowSelectedDates(!showSelectedDates)}>
+						Show notes
+					</li>
 			</ul>
 		</nav>
 	)

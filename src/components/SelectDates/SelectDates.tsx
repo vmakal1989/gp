@@ -1,0 +1,66 @@
+import React, {createElement, FunctionComponent, useEffect, useState} from 'react'
+import MomentUtils from '@date-io/moment'
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers'
+import style from './SelectDates.module.css'
+import { ThemeProvider, createMuiTheme } from '@material-ui/core'
+import {amber} from '@material-ui/core/colors'
+import moment from 'moment'
+import {Link, Redirect } from 'react-router-dom'
+
+interface propsType {
+	setShowSelectedDates: (type: boolean) => void
+}
+
+export const SelectDates: FunctionComponent<propsType> = ({setShowSelectedDates}) => {
+	const [dateOne, changeDateOne] = useState<null | object>(moment())
+	const [dateTwo, changeDateTwo] = useState<null | object>(moment())
+	const [isValidDates, setValidDates] = useState<boolean>(true)
+
+	useEffect(() => {
+		setValidDates(moment(dateOne).isSameOrBefore(dateTwo))
+	},[dateOne, dateTwo] )
+
+	const defaultMaterialTheme = createMuiTheme({
+		palette: {
+			primary: amber,
+		}
+	})
+
+	const handleSubmit = () => {
+		if(isValidDates) setShowSelectedDates(false)
+	}
+
+	return (
+		<div className={style.dates__wrapper}>
+			<div className={style.dates__title}>Set interval dates</div>
+			<div className={style.dates__container}>
+				<ThemeProvider theme={defaultMaterialTheme}>
+					<MuiPickersUtilsProvider utils={MomentUtils}>
+						<KeyboardDatePicker
+							autoOk
+							value={dateOne}
+							onChange={changeDateOne}
+							format="DD/MM/yyyy"
+							className={style.dates__field}
+							InputAdornmentProps={{ position: "start" }}
+						/>
+						<KeyboardDatePicker
+							autoOk
+							format="DD/MM/yyyy"
+							value={dateTwo}
+							onChange={changeDateTwo}
+							className={style.dates__field}
+							InputAdornmentProps={{ position: "start" }}
+						/>
+					</MuiPickersUtilsProvider>
+				</ThemeProvider>
+			</div>
+			{!isValidDates ? <div className={style.dates__error}>Dates aren't correct!</div> : null}
+			<div className={style.dates__button_box}>
+				{ isValidDates ?
+					<Link to={`/notepad?dateOne=${moment(dateOne).format("DD.MM.yyyy")}&dateTwo=${moment(dateTwo).format("DD.MM.yyyy")}` }><button className={style.dates__button} onClick={handleSubmit}>Send</button></Link> :
+					<button className={style.dates__button} onClick={handleSubmit}>Send</button> }
+			</div>
+		</div>
+	)
+}

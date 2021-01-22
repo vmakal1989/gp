@@ -2,40 +2,35 @@ import { noteType } from "../types/types"
 
 const ADD_NOTE: string = 'ADD_NOTE'
 
-type initialStateType = {
-    date : string
-    time: string
-    value: string
-}
 type actionType = {
     type: string
     note: noteType
 }
 
-const initialState: initialStateType[] = [
+const initialState: noteType[] = [
         {
             date : '',
             time: '',
             value: ''
         },
         {
-            date : '21.01.21',
+            date : '22.01.21',
             time: '07.00',
             value: 'Hello'
         },
         {
-            date : '21.01.21',
+            date : '24.01.21',
             time: '14.00',
             value: 'Today will be a good day'
         },
         {
-            date : '21.01.21',
+            date : '24.01.21',
             time: '16.00',
             value: 'Today will be a good day'
         }
 ]
 
-export const notesReducer = (state=initialState, action: actionType): initialStateType[] => {
+export const notesReducer = (state=initialState, action: actionType): noteType[] => {
     switch (action.type) {
         case ADD_NOTE:
             for(let i = 0; i < state.length; i++) {

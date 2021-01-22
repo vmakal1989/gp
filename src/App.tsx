@@ -7,6 +7,8 @@ import {Notepad} from "./components/Notepad/Notepad"
 import {Route, BrowserRouter, withRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import store from "./redux/store-redux";
+import {SelectDates} from "./components/SelectDates/SelectDates";
+import classNames from "classnames";
 
 const getNotepadTitle = (pathname: string): string => {
     const pathArray = pathname.split('/')
@@ -14,7 +16,10 @@ const getNotepadTitle = (pathname: string): string => {
 }
 
 const App: FunctionComponent<any> = (props) => {
+
     const [currentPeriod, setCurrentPeriod] = useState<string>('week')
+    const [showSelectedDates, setShowSelectedDates] = useState<boolean>(false)
+
     function toggleCurrentPeriod(type: string): void {
         setCurrentPeriod(type)
     }
@@ -23,7 +28,13 @@ const App: FunctionComponent<any> = (props) => {
     }
     return (
     <div className='app'>
-        <Navbar currentPeriod={currentPeriod} toggleCurrentPeriod={toggleCurrentPeriod}/>
+        <Navbar currentPeriod={currentPeriod}
+                toggleCurrentPeriod={toggleCurrentPeriod}
+                setShowSelectedDates={setShowSelectedDates}
+                showSelectedDates={showSelectedDates}/>
+        <div className={classNames('dates__popup', showSelectedDates ? 'dates__popup_active' : '')}>
+            <SelectDates setShowSelectedDates={setShowSelectedDates}/>
+        </div>
         <Route path='/' exact render={() => renderPeriod()}/>
         <Route path='/notepad' render={() => <Notepad date={getNotepadTitle(props.location.pathname)}/>}/>
     </div>

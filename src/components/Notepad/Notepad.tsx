@@ -1,7 +1,7 @@
 import React, {FunctionComponent} from 'react'
 import { Link } from 'react-router-dom'
 import style from './Notepad.module.css'
-import {NodepadRowContainer} from "./NodepadRow";
+import {NodepadRowContainer} from "./NodepadRow"
 
 interface propsType {
     date: string

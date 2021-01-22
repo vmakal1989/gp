@@ -32,6 +32,9 @@
 .item_current {
     background-color: #ff6f00;
 }
+.item_focus {
+    background-color: #ff8f00;
+}
 @media(max-width: 510px) {
     .items a {
         width: 33%
@@ -43,3 +46,4 @@
         width: 100%;
     }
 }
+
