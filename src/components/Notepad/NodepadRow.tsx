@@ -1,26 +1,27 @@
 import React, {FunctionComponent, useState} from "react"
-import style from "./Notepad.module.css";
-import TextareaAutosize from "react-autosize-textarea";
-import {connect} from "react-redux";
+import style from "./Notepad.module.css"
+import TextareaAutosize from "react-autosize-textarea"
+import {connect} from "react-redux"
 import {addNote} from "../../redux/notes-reducer"
-import { noteType } from "../../types/types";
+import { noteType } from "../../types/types"
 
 interface propsType {
     hour: string
-    fieldValue: string
+    fieldData: fieldDataType
     date: string
     addNote: any
-}
-interface containerPropsType {
-    hour: string
-    date: string
+    title: string
 }
 type mapStateToPropsType = {
-    fieldValue: string
+    fieldData: fieldDataType
 }
 
-const NodepadRow: FunctionComponent<propsType> = ({hour, fieldValue, date, addNote}) => {
-    let [noteFieldValue, setNoteFieldValue] = useState<string>(fieldValue)
+type fieldDataType = {
+    text: string
+}
+
+const NodepadRow: FunctionComponent<propsType> = ({hour, fieldData, date, addNote, title}) => {
+    let [noteFieldValue, setNoteFieldValue] = useState<string>(fieldData.text)
     const changeField = (e) => {
         setNoteFieldValue(e.target.value)
     }
@@ -28,41 +29,43 @@ const NodepadRow: FunctionComponent<propsType> = ({hour, fieldValue, date, addNo
     const addNewNote = () => {
         const newNote: noteType = {
             date : `${date}`,
-            time: `${hour}.00`,
+            time: `${hour}`,
             value: noteFieldValue.trim()
         }
         addNote(newNote)
     }
 
     return (
-        <div className={style.notepad_row}>
-            <span className={style.time}>{hour}.00</span><TextareaAutosize value={noteFieldValue}
-                                                                           className={style.field}
-                                                                           onChange={changeField}
-                                                                           onBlur={addNewNote}
-                                                                           />
+        <div>
+            { title ? <div className={style.title__notepad_row}>{title}</div> : null}
+            <div className={style.notepad_row}>
+                <span className={style.time}>{hour}</span><TextareaAutosize value={noteFieldValue}
+                                                                            className={style.field}
+                                                                            onChange={changeField}
+                                                                            onBlur={addNewNote}
+            />
+            </div>
         </div>
+
     )
 }
 
-const getFieldValue = (state, date, hour): string => {
-    let fieldValue = ''
-    for(let el of state.notes) {
-        if(el.date === date && el.time === `${hour}.00` && el.value) {
-            fieldValue = el.value
-            break
-        } else {
-            fieldValue = ''
+const getFieldData = (state, date, hour): fieldDataType => {
+    let fieldData: fieldDataType = {text: ''}
+        for(let el of state.notes) {
+            if(el.date === date[0] && el.time === hour && el.value) {
+                fieldData.text = el.value
+                break
+            }
         }
-    }
-    return fieldValue
+    return fieldData
 }
 
 const mapStateToProps = (state, {date, hour}): mapStateToPropsType => {
     return {
-        fieldValue: getFieldValue(state, date, hour)
+        fieldData: getFieldData(state, date, hour)
     }
 
 }
 
-export const NodepadRowContainer: FunctionComponent<containerPropsType> = connect(mapStateToProps, {addNote})(NodepadRow)
+export const NodepadRowContainer: FunctionComponent<any> = connect(mapStateToProps, {addNote})(NodepadRow)

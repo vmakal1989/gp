@@ -12,7 +12,7 @@ export const getDaysOfTheWeek = (count: number): elementsOfDayType[] => {
 			number: moment().dayOfYear(i).format('D'),
 			current: moment().dayOfYear() === i ? true : false,
 			isHoliday: isHoliday(moment().dayOfYear(i).format('dddd')),
-			date: moment().dayOfYear(i).format("DD.MM.YY")
+			date: moment().dayOfYear(i).format("DD.MM.YYYY")
 		})
 	}
 	return daysOfTheWeek

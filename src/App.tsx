@@ -3,29 +3,23 @@ import './App.css'
 import {Navbar} from "./components/Navbar/Navbar"
 import { Month } from './components/Periods/Month/Month'
 import {Week} from "./components/Periods/Week/Week"
-import {Notepad} from "./components/Notepad/Notepad"
+import {NotepadContainer} from "./components/Notepad/Notepad"
 import {Route, BrowserRouter, withRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import store from "./redux/store-redux";
 import {SelectDates} from "./components/SelectDates/SelectDates";
 import classNames from "classnames";
 
-const getNotepadTitle = (pathname: string): string => {
-    const pathArray = pathname.split('/')
-    return pathArray[2]
-}
+const getNotepadTitle = (pathname: string): Array<string> => pathname.split('/')[2].split('-')
 
 const App: FunctionComponent<any> = (props) => {
 
     const [currentPeriod, setCurrentPeriod] = useState<string>('week')
     const [showSelectedDates, setShowSelectedDates] = useState<boolean>(false)
 
-    function toggleCurrentPeriod(type: string): void {
-        setCurrentPeriod(type)
-    }
-    const renderPeriod = (): JSX.Element => {
-        return currentPeriod === 'week' ? <Week /> : <Month />
-    }
+    const toggleCurrentPeriod = (type: string): void  => setCurrentPeriod(type)
+    const renderPeriod = (): JSX.Element => currentPeriod === 'week' ? <Week /> : <Month />
+
     return (
     <div className='app'>
         <Navbar currentPeriod={currentPeriod}
@@ -33,10 +27,12 @@ const App: FunctionComponent<any> = (props) => {
                 setShowSelectedDates={setShowSelectedDates}
                 showSelectedDates={showSelectedDates}/>
         <div className={classNames('dates__popup', showSelectedDates ? 'dates__popup_active' : '')}>
-            <SelectDates setShowSelectedDates={setShowSelectedDates}/>
+            <SelectDates setShowSelectedDates={setShowSelectedDates}
+                         toggleCurrentPeriod={toggleCurrentPeriod}/>
         </div>
         <Route path='/' exact render={() => renderPeriod()}/>
-        <Route path='/notepad' render={() => <Notepad date={getNotepadTitle(props.location.pathname)}/>}/>
+        <Route path='/notepad' render={() => <NotepadContainer date={getNotepadTitle(props.location.pathname)}
+                                                               toggleCurrentPeriod={toggleCurrentPeriod}/>}/>
     </div>
     )
 }

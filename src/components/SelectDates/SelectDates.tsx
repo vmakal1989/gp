@@ -1,17 +1,18 @@
-import React, {createElement, FunctionComponent, useEffect, useState} from 'react'
+import React, {FunctionComponent, useEffect, useState} from 'react'
 import MomentUtils from '@date-io/moment'
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers'
 import style from './SelectDates.module.css'
 import { ThemeProvider, createMuiTheme } from '@material-ui/core'
 import {amber} from '@material-ui/core/colors'
 import moment from 'moment'
-import {Link, Redirect } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 interface propsType {
 	setShowSelectedDates: (type: boolean) => void
+	toggleCurrentPeriod: (type: string) => void
 }
 
-export const SelectDates: FunctionComponent<propsType> = ({setShowSelectedDates}) => {
+export const SelectDates: FunctionComponent<propsType> = ({setShowSelectedDates, toggleCurrentPeriod}) => {
 	const [dateOne, changeDateOne] = useState<null | object>(moment())
 	const [dateTwo, changeDateTwo] = useState<null | object>(moment())
 	const [isValidDates, setValidDates] = useState<boolean>(true)
@@ -27,7 +28,10 @@ export const SelectDates: FunctionComponent<propsType> = ({setShowSelectedDates}
 	})
 
 	const handleSubmit = () => {
-		if(isValidDates) setShowSelectedDates(false)
+		if(isValidDates) {
+			setShowSelectedDates(false)
+			toggleCurrentPeriod('show notes')
+		}
 	}
 
 	return (
@@ -58,7 +62,7 @@ export const SelectDates: FunctionComponent<propsType> = ({setShowSelectedDates}
 			{!isValidDates ? <div className={style.dates__error}>Dates aren't correct!</div> : null}
 			<div className={style.dates__button_box}>
 				{ isValidDates ?
-					<Link to={`/notepad?dateOne=${moment(dateOne).format("DD.MM.yyyy")}&dateTwo=${moment(dateTwo).format("DD.MM.yyyy")}` }><button className={style.dates__button} onClick={handleSubmit}>Send</button></Link> :
+					<Link to={`/notepad/${moment(dateOne).format("DD.MM.yyyy")}-${moment(dateTwo).format("DD.MM.yyyy")}` }><button className={style.dates__button} onClick={handleSubmit}>Send</button></Link> :
 					<button className={style.dates__button} onClick={handleSubmit}>Send</button> }
 			</div>
 		</div>

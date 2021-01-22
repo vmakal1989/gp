@@ -14,17 +14,17 @@ const initialState: noteType[] = [
             value: ''
         },
         {
-            date : '22.01.21',
+            date : '22.01.2021',
             time: '07.00',
             value: 'Hello'
         },
         {
-            date : '24.01.21',
+            date : '24.01.2021',
             time: '14.00',
             value: 'Today will be a good day'
         },
         {
-            date : '24.01.21',
+            date : '24.01.2021',
             time: '16.00',
             value: 'Today will be a good day'
         }
