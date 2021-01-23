@@ -88,6 +88,10 @@
         padding: 20px;
         position: relative;
     }
+    .notepad__message {
+        font-size: 20px;
+        padding: 10px 40px;
+    }
 }
 @media (max-width: 480px) {
     .notepad {
@@ -111,6 +115,9 @@
     }
     .title {
         font-size: 30px;
+    }
+    .title__notepad_row {
+        font-size: 20px;
     }
 
     .field {

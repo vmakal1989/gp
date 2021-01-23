@@ -3,7 +3,6 @@ import style from "./Notepad.module.css"
 import TextareaAutosize from "react-autosize-textarea"
 import {connect} from "react-redux"
 import {addNote} from "../../redux/notes-reducer"
-import { noteType } from "../../types/types"
 
 interface propsType {
     hour: string
@@ -20,20 +19,12 @@ type fieldDataType = {
     text: string
 }
 
-const NodepadRow: FunctionComponent<propsType> = ({hour, fieldData, date, addNote, title}) => {
-    let [noteFieldValue, setNoteFieldValue] = useState<string>(fieldData.text)
-    const changeField = (e) => {
-        setNoteFieldValue(e.target.value)
-    }
 
-    const addNewNote = () => {
-        const newNote: noteType = {
-            date : `${date}`,
-            time: `${hour}`,
-            value: noteFieldValue.trim()
-        }
-        addNote(newNote)
-    }
+const NotepadRow: FunctionComponent<propsType> = ({hour, fieldData, date, addNote, title}) => {
+    let [noteFieldValue, setNoteFieldValue] = useState<string>(fieldData.text)
+
+    const changeField = (e): void => setNoteFieldValue(e.target.value)
+    const addNewNote= (): void => addNote(date[0], hour, noteFieldValue.trim())
 
     return (
         <div>
@@ -68,4 +59,4 @@ const mapStateToProps = (state, {date, hour}): mapStateToPropsType => {
 
 }
 
-export const NodepadRowContainer: FunctionComponent<any> = connect(mapStateToProps, {addNote})(NodepadRow)
+export const NotepadRowContainer: FunctionComponent<any> = connect(mapStateToProps, {addNote})(NotepadRow)

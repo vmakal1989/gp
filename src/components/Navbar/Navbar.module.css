@@ -37,13 +37,14 @@
 }
 @media(max-width: 510px) {
     .items a {
-        width: 33%
+        min-width: 33%
     }
-    .items a:nth-child(2) {
+    .items a:nth-child(3) {
         width: 34%
     }
     .item {
         width: 100%;
+        font-size: 16px;
     }
 }
 

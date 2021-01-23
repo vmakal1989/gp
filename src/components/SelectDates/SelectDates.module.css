@@ -52,4 +52,10 @@
     color: red;
     font-style: italic;
 }
+@media(max-width: 510px) {
+    .dates__wrapper {
+        width: 100%;
+        left: 0;
+    }
+}
 

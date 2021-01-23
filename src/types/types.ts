@@ -8,7 +8,8 @@ export interface elementsOfDayType {
 }
 
 export interface noteType {
-    date: string
+    id: number
+    date: string | null
     time: string
     value: string
 }
