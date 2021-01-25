@@ -18,22 +18,29 @@ interface datesDataType {
     current: boolean
     data: Array<noteType>
 }
+interface NotepadContainerTypes {
+    date: string[]
+    toggleCurrentPeriod: (string) => void
+}
+type stateType = {
+    notes: noteType[]
+}
 
 const Notepad: FunctionComponent<propsType> = ({date, datesData,toggleCurrentPeriod}) => {
     const hours: Array<string> = ['00.00','01.00','02.00','03.00','04.00','06.00','07.00','08.00','09.00','10.00','11.00','12.00','13.00','14.00','15.00','16.00','17.00','18.00','19.00','20.00','21.00','22.00','23.00']
 
-    const setPrevTitle = (title) => {
-        let prevTitle = title
-        return (newTitle) => prevTitle !== newTitle ? prevTitle = newTitle : null
+    const setPrevTitle = (title: string ): (newTitle: string) => void => {
+        let prevTitle: string = title
+        return (newTitle: string): string => prevTitle !== newTitle ? prevTitle = newTitle : ''
     }
 
-    const getTitle = setPrevTitle('')
+    const getTitle: (newTitle: string) => void = setPrevTitle('')
 
     const renderNotepadRow = () => {
         return datesData.current ?
             datesData.data.map(el => <NotepadRowContainer key={el.id} hour={el.time} date={[el.date]} title={getTitle(el.date)}/>)
             :
-            hours.map(hour => <NotepadRowContainer key={hour} hour={hour} date={date}/>)
+            hours.map(hour => <NotepadRowContainer key={hour} hour={hour} date={date} title={''}/>)
     }
 
     return (
@@ -48,7 +55,7 @@ const Notepad: FunctionComponent<propsType> = ({date, datesData,toggleCurrentPer
     )
 }
 
-const getDatesData = (state, date: Array<string>): datesDataType => {
+const getDatesData = (state: stateType, date: Array<string>): datesDataType => {
     let datesData: datesDataType = {current: false, data: []}
     if(date.length > 1) {
         datesData.current = true
@@ -58,7 +65,7 @@ const getDatesData = (state, date: Array<string>): datesDataType => {
             let noteDate = el.date.split('.').reverse().join('-')
             if(moment(noteDate).isBetween(dateOne, dateTwo, undefined, '[]')) datesData.data.push(el)
         }
-        datesData.data.sort((a: any,b: any) => a.time-b.time)
+        datesData.data.sort((a: any, b: any) => a.time-b.time)
         datesData.data.sort((a: noteType,b: noteType) => {
             // @ts-ignore
             return moment(a.date.split('.').reverse().join('-'))-moment(b.date.split('.').reverse().join('-'))
@@ -73,4 +80,4 @@ const mapStateToProps = (state, {date}): mapStateToPropsType => {
     }
 }
 
-export const NotepadContainer: FunctionComponent<any> = connect(mapStateToProps, null)(Notepad)
+export const NotepadContainer: React.FC<any> = connect(mapStateToProps, null)(Notepad)

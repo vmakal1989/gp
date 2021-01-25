@@ -12,7 +12,7 @@ import classNames from "classnames";
 
 const getNotepadTitle = (pathname: string): Array<string> => pathname.split('/')[2].split('-')
 
-const App: FunctionComponent<any> = (props) => {
+const App = (props) => {
 
     const [currentPeriod, setCurrentPeriod] = useState<string>('week')
     const [showSelectedDates, setShowSelectedDates] = useState<boolean>(false)
@@ -32,7 +32,7 @@ const App: FunctionComponent<any> = (props) => {
         </div>
         <Route path='/' exact render={() => renderPeriod()}/>
         <Route path='/notepad' render={() => <NotepadContainer date={getNotepadTitle(props.location.pathname)}
-                                                               toggleCurrentPeriod={toggleCurrentPeriod}/>}/>
+                                                               toggleCurrentPeriod={toggleCurrentPeriod} />}/>
     </div>
     )
 }
