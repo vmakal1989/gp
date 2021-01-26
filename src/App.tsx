@@ -3,7 +3,7 @@ import './App.css'
 import {Navbar} from "./components/Navbar/Navbar"
 import { Month } from './components/Periods/Month/Month'
 import {Week} from "./components/Periods/Week/Week"
-import {NotepadContainer} from "./components/Notepad/Notepad"
+import NotepadContainer from "./components/Notepad/NotepadContainer"
 import {Route, BrowserRouter, withRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import store from "./redux/store-redux";

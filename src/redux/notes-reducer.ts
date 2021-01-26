@@ -97,5 +97,5 @@ export const notesReducer = (state=initialState, action: actionType): noteType[]
     }
 }
 
-export const addNote = (date: string, hour: string, value: string): actionType => ({type: ADD_NOTE, date, hour, value })
+export const addNewNote = (date: string, hour: string, value: string): actionType => ({type: ADD_NOTE, date, hour, value })
 
