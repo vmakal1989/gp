@@ -4,16 +4,18 @@ import {connect} from "react-redux";
 import {addNewNote} from "../../../redux/notes-reducer";
 import {NotepadRow} from "./NotepadRow";
 
-type NotepadRowContainerType = {
+type NotepadRowContainerType = MapStatePropsType & MapDispatchProps & OwnProps
+
+type MapStatePropsType = {
+	fieldData: string
+}
+type MapDispatchProps = {
+	addNewNote: (date: string, hour: string, value: string) => void
+}
+type OwnProps = {
 	hour: string
 	date: string | string[]
 	title: string | void
-	fieldData: string
-	addNewNote: (date: string, hour: string, value: string) => void
-}
-
-type MapStateToPropsType = {
-	fieldData: string
 }
 
 const NotepadRowContainer: React.FC<NotepadRowContainerType> = ({hour, date, title, fieldData, addNewNote}) => {
@@ -43,11 +45,11 @@ const getFieldData = (state: AppStateType, date: string[], hour: string): string
 	return fieldData
 }
 
-const mapStateToProps = (state: AppStateType, {date, hour}): MapStateToPropsType => {
+const mapStateToProps = (state: AppStateType, {date, hour}): MapStatePropsType => {
 	return {
 		fieldData: getFieldData(state, date, hour)
 	}
 
 }
 
-export default connect(mapStateToProps, {addNewNote})(NotepadRowContainer)
+export default connect<MapStatePropsType, MapDispatchProps, OwnProps, AppStateType>(mapStateToProps, {addNewNote})(NotepadRowContainer)
