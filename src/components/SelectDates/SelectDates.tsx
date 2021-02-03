@@ -27,7 +27,7 @@ export const SelectDates: FunctionComponent<propsType> = ({setShowSelectedDates,
 		}
 	})
 
-	const handleSubmit = () => {
+	const handleSubmit = (): void => {
 		if(isValidDates) {
 			setShowSelectedDates(false)
 			toggleCurrentPeriod('show notes')

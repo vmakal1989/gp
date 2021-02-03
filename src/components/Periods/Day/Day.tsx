@@ -16,7 +16,7 @@ type DayPropsType = OwnPropsType & MapStateProsType
 
 const Day: FunctionComponent<DayPropsType> = ({day, notes}) => {
     return (
-        <Link to={'/notepad/'+ day.date} >
+        <Link className={style.link} to={'notepad/'+ day.date} >
             <div className={classNames([style.item, day.current ? style.current : ''])}>
                 <div className={classNames([style.nameOfDay, day.isHoliday ? style.isHoliday : ''])}>{day.name}</div>
                 <div className={classNames([style.number])}>{day.number}</div>

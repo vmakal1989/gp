@@ -14,7 +14,7 @@ type propsType = {
 export const NotepadRow: React.FC<propsType> = ({hour, addNote, title, value,changeField}) => {
     return (
         <div>
-            { title ? <div className={style.title__notepad_row}>{title}</div> : null}
+            { title && <div className={style.title__notepad_row}>{title}</div>}
             <div className={style.notepad_row}>
                 <span className={style.time}>{hour}</span><TextareaAutosize value={value}
                                                                             className={style.field}

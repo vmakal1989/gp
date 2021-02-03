@@ -25,7 +25,7 @@ export const Notepad: React.FC<PropsType> = ({date, datesData,toggleCurrentPerio
     return (
         <div className={style.container}>
             <div className={style.notepad}>
-                <Link to='/' className={style.log_out} onClick={() => toggleCurrentPeriod('month')}> </Link>
+                <Link to='/' className={style.log_out} onClick={() => toggleCurrentPeriod('week')}> </Link>
                 {date.length === 1 ? <div className={style.title}>{date}</div> :
                     datesData.data.length === 0 ? <div className={style.notepad__message}>There aren't notes in the specified range</div> : ''}
                 {renderNotepadRow()}
