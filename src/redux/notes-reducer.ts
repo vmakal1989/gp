@@ -53,7 +53,7 @@ const removeNoteAC = (id: number): RemoveNoteType => ({type: REMOVE_NOTE, id})
 
 export const addNewNote = (date: string, hour: string, value: string) => {
     return (dispatch, getState) => {
-        dispatch(addNoteAC(date, hour, value, getState().user.id))
+        dispatch(addNoteAC(date, hour, value, getState().auth.id))
     }
 }
 export const editNote = (id: number, value: string) => {

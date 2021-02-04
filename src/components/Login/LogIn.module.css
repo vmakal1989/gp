@@ -1,0 +1,107 @@
+.login_container {
+    width: 330px;
+    min-height: 200px;
+    margin: 10% auto;
+    padding: 15px 20px;
+    text-align: right;
+    background-color: #ffb300;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #ffb300;
+    z-index: 5;
+    box-sizing: border-box;
+}
+
+.title {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 10px;
+    color: #fff;
+    font-weight: bold;
+}
+.field {
+    min-width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    border: none;
+    font-size: 22px;
+    box-shadow: 0 .2px 0 #000000;
+    outline: none;
+    margin-bottom: 5px;
+    margin-top: 15px;
+    border-radius: 3px;
+    padding-left: 10px;
+}
+.field:-webkit-autofill,
+.field:-webkit-autofill:hover,
+.field:-webkit-autofill:focus,
+.field:-webkit-autofill:active  {
+    transition: background-color 5000s;
+    -webkit-text-fill-color: #000000 !important;
+}
+.error {
+    color: red;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.field_error {
+    box-shadow: 0 0 5px red;
+}
+
+.submit {
+    width: 120px;
+    height: 45px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 0 5px #ff6f00;
+    background-color: #ff6f00;
+    color: #fff;
+    font-weight: bold;
+    font-size: 22px;
+}
+.submit:focus {
+    outline:none;
+}
+.submit:active {
+    transform: scale(.98);
+}
+.submit:hover {
+    opacity: .9;
+}
+
+.link {
+    text-decoration: none;
+    color: #fff;
+}
+.link:hover {
+    opacity: .8;
+}
+.nav_box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+@media(max-width: 330px) {
+    .login_container {
+        width: 100%;
+        border-radius: 0;
+        padding: 15px 5px;
+    }
+    .title {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    .field {
+        width: 100%;
+        height: 30px;
+        font-size: 18px;
+        padding-left: 5px;
+    }
+    .submit {
+        width: 100px;
+        height: 40px;
+        font-size: 20px;
+    }
+}

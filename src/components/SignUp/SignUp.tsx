@@ -1,12 +1,10 @@
 import React from 'react'
 import style from './SignUp.module.css'
-import {Field, reduxForm} from "redux-form"
-import {validate} from "../../../helpers/validation/validate-form"
+import {Field} from "redux-form"
 import {NavLink} from "react-router-dom"
-import { renderField } from '../../../helpers/renderField/renderField'
+import { renderField } from '../../helpers/renderField/renderField'
 
-
-const ReduxSignUpForm = ({handleSubmit}) => {
+export const ReduxSignUpForm = ({handleSubmit}) => {
     return (
         <div className={style.sign_up_container}>
             <div className={style.title}>Sign Up</div>
@@ -20,7 +18,7 @@ const ReduxSignUpForm = ({handleSubmit}) => {
                     </div>
                 </div>
                 <div>
-                    <Field name="email" component={renderField} type="text"  style={style}placeholder='Email'/>
+                    <Field name="email" component={renderField} type="text"  style={style} placeholder='Email'/>
                 </div>
                 <div className={style.flex_box}>
                     <div className={style.flex_field}>
@@ -38,13 +36,3 @@ const ReduxSignUpForm = ({handleSubmit}) => {
         </div>
     )
 }
-
-const SignUpForm = reduxForm({form: 'signup', validate})(ReduxSignUpForm)
-
-const ContainerSignUpForm = () => {
-    const onSubmit = (formData) => {
-    }
-    return <SignUpForm onSubmit={onSubmit} />
-}
-
-export default ContainerSignUpForm

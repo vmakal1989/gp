@@ -1,28 +1,22 @@
-import React, {FunctionComponent, useState} from 'react'
+import React, {FunctionComponent} from 'react'
 import style from './Navbar.module.css'
 import classNames from "classnames";
 import { Link } from 'react-router-dom';
 import ChooseDay from '../ChooseDay/ChooseDay';
+import { PropsType } from './NavbarContainer';
 
-interface navbarProps {
-	currentPeriod: string
-	toggleCurrentPeriod: (type: string) => void
-	setShowSelectedDates: (type: boolean) => void
-	showSelectedDates: boolean
-}
-
-export const Navbar: FunctionComponent<navbarProps> = ({currentPeriod, toggleCurrentPeriod, setShowSelectedDates,showSelectedDates}) => {
+export const Navbar: FunctionComponent<PropsType> = ({currentPeriod, toggleCurrentPeriod, setShowSelectedDates,showSelectedDates, isAuth, removeSessions}) => {
 	return (
 		<nav className={style.container}>
 			<ul className={style.items}>
-				<li className={classNames([style.item, currentPeriod === 'week' ? style.item_current : ''])}
-					onClick={() => toggleCurrentPeriod('week')}>
-					<Link className={style.link} to="/" >7 days</Link>
-				</li>
-				<li className={classNames([style.item, currentPeriod === 'month' ? style.item_current : ''])}
-					onClick={ () => toggleCurrentPeriod('month')}>
-					<Link className={style.link} to="/" >28 days</Link>
-				</li>
+				<Link className={classNames([style.link, style.item, currentPeriod === 'week' ? style.item_current : ''])}
+					onClick={() => toggleCurrentPeriod('week')} to="/" >
+					<li>7 days</li>
+				</Link>
+				<Link className={classNames([style.link, style.item, currentPeriod === 'month' ? style.item_current : ''])}
+					  onClick={ () => toggleCurrentPeriod('month')} to="/" >
+					<li>28 days</li>
+				</Link>
 				<li className={classNames([style.item, style.item_select_dates, currentPeriod === 'show notes' ? style.item_current : '',showSelectedDates ? style.item_focus : ''])}
 					onClick={() => setShowSelectedDates(!showSelectedDates)}>
 					Notes
@@ -30,6 +24,16 @@ export const Navbar: FunctionComponent<navbarProps> = ({currentPeriod, toggleCur
 				<li className={classNames([style.item, style.item_choose_day, currentPeriod === 'choose date' ? style.item_current : ''])}>
 					<ChooseDay toggleCurrentPeriod={toggleCurrentPeriod}/>
 				</li>
+				{
+					!isAuth ?
+						<Link className={classNames([style.link, style.item, style.item_login, currentPeriod === 'login' ? style.item_current : ''])} to="/login"
+							  onClick={ () => toggleCurrentPeriod('login')}>
+							<li>Log In</li>
+						</Link>
+					:
+						<li className={classNames([style.link, style.item, style.item_login])} onClick={removeSessions}>Sign out</li>
+				}
+
 			</ul>
 		</nav>
 	)
