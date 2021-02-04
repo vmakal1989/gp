@@ -9,6 +9,7 @@ export interface elementsOfDayType {
 
 export interface noteType {
     id: number
+    user_id: number
     date: string
     time: string
     value: string
