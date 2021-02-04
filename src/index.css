@@ -15,6 +15,5 @@ body::before {
   position: absolute;
   opacity: .6;
   z-index: -100;
-  background: url("images/kosmonavt.jpg") no-repeat center;
-  background-size: cover;
+  background-image: url("assets/images/kosmonavt.jpg");
 }

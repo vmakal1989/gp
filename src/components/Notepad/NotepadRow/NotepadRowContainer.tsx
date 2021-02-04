@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {AppStateType} from "../../../redux/store-redux";
 import {connect} from "react-redux";
 import {addNewNote} from "../../../redux/notes-reducer";
@@ -21,6 +21,7 @@ type OwnProps = {
 const NotepadRowContainer: React.FC<NotepadRowContainerType> = ({hour, date, title, fieldData, addNewNote}) => {
 
 	let [noteFieldValue, setNoteFieldValue] = useState<string>(fieldData)
+	useEffect(()=> setNoteFieldValue(fieldData),[date])
 
 	const changeField = (e: React.ChangeEvent<HTMLTextAreaElement>): void => setNoteFieldValue(e.target.value)
 	const addNote = (): void => addNewNote(date[0], hour, noteFieldValue.trim())
