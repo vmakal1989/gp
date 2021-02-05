@@ -24,10 +24,10 @@ const LoginFormContainer: React.FC<PropsType> = ({newSessions, isFetching}) => {
     const onSubmit = (formData: FormDataType) => {
         newSessions(formData.email, formData.password)
     }
-    return <LoginForm onSubmit={onSubmit} />
+    return <LoginForm onSubmit={onSubmit} isFetching={isFetching}/>
 }
 
-const LoginForm = reduxForm<FormDataType>({form: 'login', validate})(ReduxLoginForm)
+const LoginForm = reduxForm<FormDataType,MapStateToPropsType>({form: 'login', validate})(ReduxLoginForm)
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {

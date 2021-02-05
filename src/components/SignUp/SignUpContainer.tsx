@@ -9,7 +9,10 @@ import {AppStateType} from "../../redux/store-redux"
 type MapDispatchPropsType = {
     signUp: (firstName: string, lastName: string, email: string, password: string) => void
 }
-type PropsType = MapDispatchPropsType
+type MapStateToPropsType = {
+    isFetching: boolean
+}
+type PropsType = MapDispatchPropsType & MapStateToPropsType
 
 export type FormDataType = {
     confirmPassword: string
@@ -19,13 +22,18 @@ export type FormDataType = {
     password: string
 }
 
-const SignUpFormContainer: React.FC<PropsType> = ({signUp}) => {
+const SignUpFormContainer: React.FC<PropsType> = ({signUp, isFetching}) => {
 
     const onSubmit = (formData: FormDataType): void => signUp(formData.firstName, formData.lastName, formData.email, formData.password)
 
-    return <SignUpForm onSubmit={onSubmit} />
+    return <SignUpForm onSubmit={onSubmit} isFetching={isFetching}/>
+}
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+    return {
+        isFetching: state.auth.isFetching
+    }
 }
 
-const SignUpForm = reduxForm<FormDataType>({form: 'signup', validate})(ReduxSignUpForm)
+const SignUpForm = reduxForm<FormDataType, MapStateToPropsType>({form: 'signup', validate})(ReduxSignUpForm)
 
-export default connect<null,MapDispatchPropsType, {}, AppStateType>(null, {signUp})(SignUpFormContainer)
+export default connect<MapStateToPropsType,MapDispatchPropsType, {}, AppStateType>(mapStateToProps, {signUp})(SignUpFormContainer)

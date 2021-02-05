@@ -3,8 +3,10 @@ import style from './SignUp.module.css'
 import {Field} from "redux-form"
 import {NavLink} from "react-router-dom"
 import { renderField } from '../../helpers/renderField/renderField'
+import preloader from "../../assets/images/preloader.svg";
 
-export const ReduxSignUpForm = ({handleSubmit, error}) => {
+export const ReduxSignUpForm = ({handleSubmit, error, isFetching}) => {
+    debugger
     return (
         <div className={style.sign_up_container}>
             <div className={style.title}>Sign Up</div>
@@ -31,7 +33,13 @@ export const ReduxSignUpForm = ({handleSubmit, error}) => {
                 { error && <div className={style.submitError}>{error.message}</div> }
                 <div className={style.nav_box}>
                     <NavLink to='/login' className={style.link}>Log In</NavLink>
-                    <button className={style.submit}>Sign Up</button>
+                    <button className={style.submit} disabled={isFetching}>
+                        {isFetching ?
+                            <img className={style.preloader} src={preloader} alt={preloader}/>
+                            :
+                            'Sign Up'
+                        }
+                    </button>
                 </div>
             </form>
         </div>

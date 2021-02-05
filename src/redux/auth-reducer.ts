@@ -69,9 +69,9 @@ export const removeSessions = () => ({type: REMOVE_SESSIONS})
 export const toggleIsFetching = (isFetching : boolean) => ({type: TOGGLE_IS_FETCHING, isFetching})
 
 export const newSessions = (email: string, password: string) => {
-	return async (dispatch) => {
-		dispatch(toggleIsFetching(true))
-		await firebaseAPI.newSession(email, password)
+	return  async (dispatch) => {
+		 await dispatch(toggleIsFetching(true))
+		 firebaseAPI.newSession(email, password)
 			.then((response) => {
 				if(response.user) {
 					let id = response.user.uid
@@ -87,9 +87,9 @@ export const newSessions = (email: string, password: string) => {
 }
 
 export const signUp = (firstName: string, lastName: string, email: string, password: string) => {
-	return async (dispatch) => {
-		dispatch(toggleIsFetching(true))
-		await firebaseAPI.createAccount(firstName, lastName, email, password)
+	return  async (dispatch) => {
+		 await dispatch(toggleIsFetching(true))
+		 firebaseAPI.createAccount(firstName, lastName, email, password)
 			.then((response) => {
 				if(response.user) {
 					let id = response.user.uid

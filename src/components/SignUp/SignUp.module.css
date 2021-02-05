@@ -80,7 +80,6 @@
 .link:hover {
     opacity: 0.8;
 }
-
 .nav_box {
     display: flex;
     justify-content: space-between;
@@ -99,6 +98,10 @@
 .submitError {
     margin-top: 10px;
     margin-bottom: -10px;
+}
+.preloader {
+    width: 40px;
+    height: 40px;
 }
 @media(max-width: 450px) {
     .sign_up_container {
