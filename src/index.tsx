@@ -4,6 +4,8 @@ import './index.css'
 import reportWebVitals from './reportWebVitals'
 import {MainApp} from "./App"
 import firebase from 'firebase'
+import { initializedUser } from './redux/auth-reducer'
+import store from './redux/store-redux'
 
 const  firebaseConfig = {
 	apiKey: "AIzaSyBodS8dyFJe8zphDqN-AhzRC5vqqVQPYuc",
@@ -15,6 +17,7 @@ const  firebaseConfig = {
 	appId: "1:380953107415:web:fb05f1e685cc9c8e148992"
 }
 firebase.initializeApp(firebaseConfig)
+firebase.auth().onAuthStateChanged((user) => user && store.dispatch(initializedUser(user.uid, user.email)))
 
 ReactDOM.render(
       <MainApp />,

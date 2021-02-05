@@ -6,7 +6,6 @@ import { renderField } from '../../helpers/renderField/renderField'
 import preloader from "../../assets/images/preloader.svg";
 
 export const ReduxSignUpForm = ({handleSubmit, error, isFetching}) => {
-    debugger
     return (
         <div className={style.sign_up_container}>
             <div className={style.title}>Sign Up</div>
