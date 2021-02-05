@@ -5,11 +5,16 @@ import {validate} from "../../helpers/validation/validate-form"
 import { ReduxSignUpForm } from './SignUp'
 import {signUp} from "../../redux/auth-reducer"
 import {AppStateType} from "../../redux/store-redux"
+import { Redirect } from 'react-router-dom'
 
 type MapDispatchPropsType = {
     signUp: (firstName: string, lastName: string, email: string, password: string) => void
 }
 type MapStateToPropsType = {
+    isFetching: boolean
+    isAuth: boolean
+}
+type ReduxProps = {
     isFetching: boolean
 }
 type PropsType = MapDispatchPropsType & MapStateToPropsType
@@ -22,18 +27,19 @@ export type FormDataType = {
     password: string
 }
 
-const SignUpFormContainer: React.FC<PropsType> = ({signUp, isFetching}) => {
+const SignUpFormContainer: React.FC<PropsType> = ({signUp, isFetching, isAuth}) => {
 
     const onSubmit = (formData: FormDataType): void => signUp(formData.firstName, formData.lastName, formData.email, formData.password)
 
-    return <SignUpForm onSubmit={onSubmit} isFetching={isFetching}/>
+    return isAuth ? <Redirect to={'/'} /> : <SignUpForm onSubmit={onSubmit} isFetching={isFetching}/>
 }
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
-        isFetching: state.auth.isFetching
+        isFetching: state.auth.isFetching,
+        isAuth: state.auth.isAuth
     }
 }
 
-const SignUpForm = reduxForm<FormDataType, MapStateToPropsType>({form: 'signup', validate})(ReduxSignUpForm)
+const SignUpForm = reduxForm<FormDataType, ReduxProps>({form: 'signup', validate})(ReduxSignUpForm)
 
 export default connect<MapStateToPropsType,MapDispatchPropsType, {}, AppStateType>(mapStateToProps, {signUp})(SignUpFormContainer)
