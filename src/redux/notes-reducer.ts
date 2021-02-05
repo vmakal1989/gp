@@ -12,7 +12,7 @@ export const notesReducer = (state=initialState, action: ActionTypes): noteType[
         case ADD_NOTE:
             const newNote: noteType = {
                 id: state.length !== 0 ? state[state.length - 1].id + 1 : 1,
-                user_id: action.user_id,
+                userId: action.userId,
                 date : action.date,
                 time: action.hour,
                 value: action.value
@@ -35,7 +35,7 @@ type AddNewNoteType = {
     date: string
     hour: string
     value: string
-    user_id: number
+    userId: string
 }
 type EditNoteType = {
     type: typeof EDIT_NOTE
@@ -47,7 +47,7 @@ type RemoveNoteType = {
     id: number
 }
 
-const addNoteAC = (date: string, hour: string, value: string, user_id: number): AddNewNoteType => ({type: ADD_NOTE, date, hour, value, user_id})
+const addNoteAC = (date: string, hour: string, value: string, userId: string): AddNewNoteType => ({type: ADD_NOTE, date, hour, value, userId: userId})
 const editNoteAC = (id: number, value: string): EditNoteType  => ({type: EDIT_NOTE, id, value})
 const removeNoteAC = (id: number): RemoveNoteType => ({type: REMOVE_NOTE, id})
 
