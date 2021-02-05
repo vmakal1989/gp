@@ -38,7 +38,8 @@
     transition: background-color 5000s;
     -webkit-text-fill-color: #000000 !important;
 }
-.error {
+.error,
+.submitError {
     color: red;
     font-size: 14px;
     font-style: italic;
@@ -82,6 +83,10 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 20px;
+}
+.submitError {
+    margin-top: 10px;
+    margin-bottom: -10px;
 }
 @media(max-width: 330px) {
     .login_container {

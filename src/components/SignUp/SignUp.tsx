@@ -4,7 +4,7 @@ import {Field} from "redux-form"
 import {NavLink} from "react-router-dom"
 import { renderField } from '../../helpers/renderField/renderField'
 
-export const ReduxSignUpForm = ({handleSubmit}) => {
+export const ReduxSignUpForm = ({handleSubmit, error}) => {
     return (
         <div className={style.sign_up_container}>
             <div className={style.title}>Sign Up</div>
@@ -28,6 +28,7 @@ export const ReduxSignUpForm = ({handleSubmit}) => {
                         <Field name="confirmPassword" component={renderField} type="password"  style={style} placeholder="Confirm password"/>
                     </div>
                 </div>
+                { error && <div className={style.submitError}>{error.message}</div> }
                 <div className={style.nav_box}>
                     <NavLink to='/login' className={style.link}>Log In</NavLink>
                     <button className={style.submit}>Sign Up</button>

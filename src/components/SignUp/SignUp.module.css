@@ -38,7 +38,8 @@
     transition: background-color 5000s;
     -webkit-text-fill-color: #000000 !important;
 }
-.error {
+.error,
+.submitError {
     text-align: right;
     color: red;
     font-size: 14px;
@@ -94,6 +95,10 @@
 .flex_field {
     width: 49%;
     box-sizing: border-box;
+}
+.submitError {
+    margin-top: 10px;
+    margin-bottom: -10px;
 }
 @media(max-width: 450px) {
     .sign_up_container {
