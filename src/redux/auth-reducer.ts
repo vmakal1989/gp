@@ -1,5 +1,6 @@
 import { stopSubmit } from "redux-form"
-import {firebaseAPI } from "../firebase/firebase"
+import {firebaseUserAPI } from "../firebase/firebase"
+import {clearNotesState, getNotes } from "./notes-reducer"
 
 const NEW_SESSIONS: string = 'AUTH/NEW_SESSIONS'
 const REMOVE_SESSIONS: string = 'AUTH/REMOVE_SESSIONS'
@@ -81,7 +82,7 @@ export const toggleIsFetching = (isFetching : boolean) => ({type: TOGGLE_IS_FETC
 export const signUp = (firstName: string, lastName: string, email: string, password: string) => {
 	return  async (dispatch) => {
 		await dispatch(toggleIsFetching(true))
-		firebaseAPI.createAccount(firstName, lastName, email, password)
+		firebaseUserAPI.createAccount(firstName, lastName, email, password)
 			.then((response) => {
 				if(response.user) {
 					let id = response.user.uid
@@ -98,11 +99,12 @@ export const signUp = (firstName: string, lastName: string, email: string, passw
 export const newSessions = (email: string, password: string) => {
 	return  async (dispatch) => {
 		 await dispatch(toggleIsFetching(true))
-		 firebaseAPI.newSession(email, password)
+		 firebaseUserAPI.newSession(email, password)
 			.then((response) => {
 				if(response.user) {
 					let id = response.user.uid
 					dispatch(newSessionsAC(id, 'test', 'test', email))
+					dispatch(getNotes(id))
 					dispatch(toggleIsFetching(false))
 				}
 			})
@@ -114,7 +116,10 @@ export const newSessions = (email: string, password: string) => {
 }
 export const removeSessions = () => {
 	return async (dispatch) => {
-		await firebaseAPI.removeSession()
-			.then((response) => dispatch(removeSessionsAC()))
+		await firebaseUserAPI.removeSession()
+			.then((response) => {
+				dispatch(clearNotesState())
+				dispatch(removeSessionsAC())
+			})
 	}
 }

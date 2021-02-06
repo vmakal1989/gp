@@ -11,8 +11,8 @@ type MapStatePropsType = {
 }
 type MapDispatchProps = {
 	addNewNote: (date: string, hour: string, value: string) => void
-	editNote: (id: number, value: string) => void
-	removeNote: (id: number) => void
+	editNote: (id: string, value: string, date: string, hour: string) => void
+	removeNote: (id: string) => void
 }
 type OwnProps = {
 	hour: string
@@ -20,34 +20,37 @@ type OwnProps = {
 	title: string | void
 }
 type NoteDataType = {
-	id: number
+	id: string
 	value: string
 }
 
-const NotepadRowContainer: React.FC<NotepadRowContainerType> = ({hour, date, title, noteData, addNewNote, editNote, removeNote}) => {
-	let prevFieldValue: string = noteData.value
-	let [noteFieldValue, setNoteFieldValue] = useState<string>(noteData.value)
-	useEffect(()=> setNoteFieldValue(noteData.value),[date])
+const NotepadRowContainer: React.FC<NotepadRowContainerType> = (props) => {
+	let prevFieldValue: string = props.noteData.value
+	let [noteFieldValue, setNoteFieldValue] = useState<string>(props.noteData.value)
+	useEffect(()=> setNoteFieldValue(props.noteData.value),[props.date])
 
 	const changeField = (e: React.ChangeEvent<HTMLTextAreaElement>): void => setNoteFieldValue(e.target.value)
 
 	const confirmField = (): void => {
-		!prevFieldValue && noteFieldValue.trim() && addNewNote(date[0], hour, noteFieldValue)
-		prevFieldValue && prevFieldValue !== noteFieldValue && noteFieldValue.trim() && editNote(noteData.id, noteFieldValue)
-		prevFieldValue && !noteFieldValue && !noteFieldValue.trim() && removeNote(noteData.id)
+		!prevFieldValue && noteFieldValue.trim() &&
+			props.addNewNote(props.date[0], props.hour, noteFieldValue)
+		prevFieldValue && prevFieldValue !== noteFieldValue && noteFieldValue.trim() &&
+			props.editNote(props.noteData.id, props.date[0], props.hour, noteFieldValue)
+		prevFieldValue && !noteFieldValue && !noteFieldValue.trim() &&
+			props.removeNote(props.noteData.id)
 	}
 
 	return (
-		<NotepadRow hour={hour}
+		<NotepadRow hour={props.hour}
 					value={noteFieldValue}
 					addNote={confirmField}
-					title={title}
+					title={props.title}
 					changeField={changeField} />
 	)
 }
 
 const getFieldData = (state: AppStateType, date: string[], hour: string): NoteDataType => {
-	let noteData: NoteDataType  = {value: '', id: 0}
+	let noteData: NoteDataType  = {value: '', id: ''}
 	for(let el of state.notes) {
 		if(el.date === date[0] && el.time === hour && el.value) {
 			noteData.value = el.value
@@ -65,4 +68,5 @@ const mapStateToProps = (state: AppStateType, {date, hour}): MapStatePropsType =
 
 }
 
-export default connect<MapStatePropsType, MapDispatchProps, OwnProps, AppStateType>(mapStateToProps, {addNewNote, editNote, removeNote})(NotepadRowContainer)
+export default connect<MapStatePropsType, MapDispatchProps, OwnProps, AppStateType>
+	(mapStateToProps, {addNewNote, editNote, removeNote})(NotepadRowContainer)
