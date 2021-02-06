@@ -6,7 +6,6 @@ import {MainApp} from "./App"
 import firebase from 'firebase'
 import { initializedUser } from './redux/auth-reducer'
 import store from './redux/store-redux'
-import {firebaseNotesAPI} from "./firebase/firebase";
 import { getNotes } from './redux/notes-reducer'
 
 const  firebaseConfig = {

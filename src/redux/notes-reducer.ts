@@ -1,6 +1,7 @@
 import {noteType} from "../types/types"
 import {firebaseNotesAPI} from "../firebase/firebase";
-import firebase from "firebase";
+import { ThunkAction } from "redux-thunk";
+import {AppStateType} from "./store-redux";
 
 const SET_NOTES: string = 'NOTES/SET_NOTES'
 const ADD_NOTE: string = 'NOTES/ADD_NOTE'
@@ -50,7 +51,7 @@ type AddNewNoteType = {
     date: string
     hour: string
     value: string
-    userId: string
+    userId: string | null
 }
 type EditNoteType = {
     type: typeof EDIT_NOTE
@@ -66,42 +67,42 @@ type clearNotesStateType = {
 }
 
 const setNotes = (notes: object): SetNotesType => ({type: SET_NOTES, notes})
-const addNoteAC = (id: string | null, date: string, hour: string, value: string, userId: string): AddNewNoteType => ({type: ADD_NOTE, id, date, hour, value, userId: userId})
+const addNoteAC = (id: string | null, date: string, hour: string, value: string, userId: string | null): AddNewNoteType => ({type: ADD_NOTE, id, date, hour, value, userId: userId})
 const editNoteAC = (id: string, value: string): EditNoteType  => ({type: EDIT_NOTE, id, value})
 const removeNoteAC = (id: string): RemoveNoteType => ({type: REMOVE_NOTE, id})
 const clearNotesStateAC = (): clearNotesStateType => ({type: CLEAR_NOTES_STATE})
 
-export const getNotes = (userID: string) => {
+export const getNotes = (userID: string): ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes> => {
     return async (dispatch) => {
         await firebaseNotesAPI.getNotes(userID)
             .then((response) => {
                 let notes = response.val()
-                dispatch(setNotes(notes))})
+                dispatch(<ActionTypes>setNotes(notes))})
     }
 }
-
-export const addNewNote = (date: string, time: string, value: string) => {
+export const addNewNote = (date: string, time: string, value: string): ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes> => {
     return async (dispatch, getState) => {
         let userId = getState().auth.user.id
         await firebaseNotesAPI.addNote(userId,{date, time, value, userId})
-            .then((response) => dispatch(addNoteAC(response.key, date, time, value, userId)))
+            .then((response) => dispatch(<ActionTypes>addNoteAC(response.key, date, time, value, userId)))
     }
 }
-export const editNote = (id: string,date: string, time: string, value: string) => {
-    return (dispatch, getState) => {
+export const editNote = (id: string,date: string, time: string, value: string): ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes> => {
+    return async (dispatch, getState) => {
         let userId = getState().auth.user.id
-        firebaseNotesAPI.editNote(userId, id,date, time, value)
-            .then(()=> dispatch(editNoteAC(id, value)))
+        await firebaseNotesAPI.editNote(userId, id,date, time, value)
+            .then(()=> dispatch(<ActionTypes>editNoteAC(id, value)))
 
     }
 }
-export const removeNote = (id: string) => {
+export const removeNote = (id: string): ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes> => {
     return async (dispatch, getState) => {
         let userId = getState().auth.user.id
         await firebaseNotesAPI.removeNote(userId, id)
-            .then(() => dispatch(removeNoteAC(id)))
+            .then(() => dispatch(<ActionTypes>removeNoteAC(id)))
     }
 }
-export const clearNotesState = () => (dispatch) => dispatch(clearNotesStateAC())
+export const clearNotesState = () => (dispatch): ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes> =>
+    dispatch(clearNotesStateAC())
 
 
