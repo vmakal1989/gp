@@ -11,10 +11,21 @@ import {SelectDates} from "./components/SelectDates/SelectDates";
 import classNames from "classnames";
 import LoginFormContainer from "./components/Login/LogInContainer";
 import SignUpFormContainer from "./components/SignUp/SignUpContainer";
+import { useEffect } from 'react'
+import firebase from "firebase";
+import {initializedUser} from "./redux/auth-reducer";
+import {getNotes} from "./redux/notes-reducer";
 
 const getNotepadTitle = (pathname: string): Array<string> => pathname.split('/')[2].split('-')
 
 const App = (props) => {
+    useEffect(()=> {
+        firebase.auth().onAuthStateChanged((user) => {
+            user && store.dispatch(initializedUser(user.uid, user.email))
+            // @ts-ignore
+            user && store.dispatch(getNotes(user.uid))
+        })
+    },[])
 
     const [currentPeriod, setCurrentPeriod] = useState<string>('week')
     const [showSelectedDates, setShowSelectedDates] = useState<boolean>(false)
