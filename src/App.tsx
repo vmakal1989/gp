@@ -1,20 +1,19 @@
 import React, {FunctionComponent, useState} from 'react'
 import './App.css'
-import NavbarContainer from "./components/Navbar/NavbarContainer"
-import { Month } from './components/Periods/Month/Month'
-import {Week} from "./components/Periods/Week/Week"
+import NavbarContainer from "./components/Header/HeaderContainer"
 import NotepadContainer from "./components/Notepad/NotepadContainer"
-import {Route, BrowserRouter, withRouter} from "react-router-dom";
-import {Provider} from "react-redux";
-import store from "./redux/store-redux";
-import {SelectDates} from "./components/SelectDates/SelectDates";
-import classNames from "classnames";
-import LoginFormContainer from "./components/Login/LogInContainer";
-import SignUpFormContainer from "./components/SignUp/SignUpContainer";
+import {Route, BrowserRouter, withRouter} from "react-router-dom"
+import {Provider} from "react-redux"
+import store from "./redux/store-redux"
+import {SelectDates} from "./components/SelectDates/SelectDates"
+import classNames from "classnames"
+import LoginFormContainer from "./components/Login/LogInContainer"
+import SignUpFormContainer from "./components/SignUp/SignUpContainer"
 import { useEffect } from 'react'
-import firebase from "firebase";
-import {initializedUser} from "./redux/auth-reducer";
-import {getNotes} from "./redux/notes-reducer";
+import firebase from "firebase"
+import {initializedUser} from "./redux/auth-reducer"
+import {getNotes} from "./redux/notes-reducer"
+import Calendar from "./components/Calendar/Calendar"
 
 const getNotepadTitle = (pathname: string): Array<string> => pathname.split('/')[2].split('-')
 
@@ -27,11 +26,10 @@ const App = (props) => {
         })
     },[])
 
-    const [currentPeriod, setCurrentPeriod] = useState<string>('week')
+    const [currentPeriod, setCurrentPeriod] = useState<string>('calendar')
     const [showSelectedDates, setShowSelectedDates] = useState<boolean>(false)
 
     const toggleCurrentPeriod = (type: string): void  => setCurrentPeriod(type)
-    const renderPeriod = (): JSX.Element => currentPeriod === 'week' ? <Week /> : <Month />
 
     return (
     <div className='app'>
@@ -43,7 +41,7 @@ const App = (props) => {
             <SelectDates setShowSelectedDates={setShowSelectedDates}
                          toggleCurrentPeriod={toggleCurrentPeriod}/>
         </div>
-        <Route path='/' exact render={() => renderPeriod()}/>
+        <Route path='/' exact render={() => <Calendar />}/>
         <Route path='/notepad' render={() => <NotepadContainer date={getNotepadTitle(props.location.pathname)}
                                                                toggleCurrentPeriod={toggleCurrentPeriod} />}/>
         <Route path='/login' component={LoginFormContainer}/>

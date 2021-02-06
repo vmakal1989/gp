@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux";
-import {Navbar} from "./Navbar";
+import {Header} from "./Header";
 import {AppStateType} from "../../redux/store-redux";
 import {removeSessions} from "../../redux/auth-reducer";
 
@@ -19,9 +19,9 @@ type MapDispatchPropsType = {
 
 export type PropsType = MapStatePropsType & OwnProps & MapDispatchPropsType
 
-const NavbarContainer: React.FC<PropsType> = (props) => {
+const HeaderContainer: React.FC<PropsType> = (props) => {
 	return (
-		<Navbar {...props}/>
+		<Header {...props}/>
 	)
 }
 
@@ -31,4 +31,4 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
 	}
 }
 
-export default connect<MapStatePropsType,MapDispatchPropsType,OwnProps, AppStateType>(mapStateToProps, {removeSessions})(NavbarContainer)
+export default connect<MapStatePropsType,MapDispatchPropsType,OwnProps, AppStateType>(mapStateToProps, {removeSessions})(HeaderContainer)

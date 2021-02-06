@@ -1,21 +1,17 @@
 import React, {FunctionComponent} from 'react'
-import style from './Navbar.module.css'
+import style from './Header.module.css'
 import classNames from "classnames";
 import { Link } from 'react-router-dom';
 import ChooseDay from '../ChooseDay/ChooseDay';
-import { PropsType } from './NavbarContainer';
+import { PropsType } from './HeaderContainer';
 
-export const Navbar: FunctionComponent<PropsType> = ({currentPeriod, toggleCurrentPeriod, setShowSelectedDates,showSelectedDates, isAuth, removeSessions}) => {
+export const Header: FunctionComponent<PropsType> = ({currentPeriod, toggleCurrentPeriod, setShowSelectedDates,showSelectedDates, isAuth, removeSessions}) => {
 	return (
 		<nav className={style.container}>
 			<ul className={style.items}>
-				<Link className={classNames([style.link, style.item, currentPeriod === 'week' ? style.item_current : ''])}
-					onClick={() => toggleCurrentPeriod('week')} to="/" >
-					<li>7 days</li>
-				</Link>
-				<Link className={classNames([style.link, style.item, currentPeriod === 'month' ? style.item_current : ''])}
-					  onClick={ () => toggleCurrentPeriod('month')} to="/" >
-					<li>28 days</li>
+				<Link className={classNames([style.link, style.item, currentPeriod === 'calendar' ? style.item_current : ''])}
+					onClick={() => toggleCurrentPeriod('calendar')} to="/" >
+					<li>Calendar</li>
 				</Link>
 				<li className={classNames([style.item, style.item_select_dates, currentPeriod === 'show notes' ? style.item_current : '',showSelectedDates ? style.item_focus : ''])}
 					onClick={() => setShowSelectedDates(!showSelectedDates)}>

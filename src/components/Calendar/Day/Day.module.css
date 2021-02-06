@@ -1,0 +1,51 @@
+.link {
+    color: #000;
+    text-decoration: none;
+}
+.green {
+    color: green;
+}
+
+.item {
+    width: calc(40px + 150 * ((100vw - 320px) / 1200 ));
+    height: calc(60px + 160 * ((100vw - 320px) / 1200 ));
+    cursor: pointer;
+    box-shadow: 0 0 5px #e0e0e0;
+    border-radius: 2px;
+    margin: calc(5px + 1 * ((100vw - 320px) / 1200 )) calc(2px + 3 * ((100vw - 320px) / 1200 ));
+    background: #ffffff;
+    padding-top: 1px;
+}
+.current {
+    box-shadow: 0 0 calc(5px + 15 * ((100vw - 320px) / 1200 )) orangered;
+}
+
+.nameOfDay, .number, .note {
+    margin-top: calc(5px + 5 * ((100vw - 320px) / 1200 ));
+    font-size: calc(7px + 25 * ((100vw - 320px) / 1200 ));
+    font-weight: bold;
+    text-align: center;
+    opacity: .7;
+}
+.number {
+    font-size: calc(20px + 60 * ((100vw - 320px) / 1200 ));
+}
+.note {
+    margin-top: calc(5px + 10 * ((100vw - 320px) / 1200 ));
+    font-size: calc(8px + 18 * ((100vw - 320px) / 1200 ));
+}
+.isHoliday {
+    color: red;
+}
+
+.item:hover .nameOfDay,
+.item:hover .number,
+.item:hover .note {
+    opacity: 1;
+}
+
+.current .nameOfDay,
+.current .number,
+.current .note {
+    opacity: .9;
+}

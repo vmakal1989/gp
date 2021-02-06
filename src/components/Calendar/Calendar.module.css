@@ -4,11 +4,5 @@
     position: relative;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-
-}
-@media (max-width: 480px) {
-    .container {
-        display: block;
-    }
+    justify-content: space-evenly;
 }
