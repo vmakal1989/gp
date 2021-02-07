@@ -5,18 +5,18 @@ const isHoliday = (name: string): boolean => {
 	return name === "Saturday" ? true : name === "Sunday"
 }
 
-const getDaysArrayByMonth = (): Array<moment.Moment>  => {
-	let daysInMonth: number = moment().daysInMonth()
+const getDaysArrayByMonth = (month): Array<moment.Moment>  => {
+	let daysInMonth: number = moment().month(month).daysInMonth()
 	let arrDays: Array<moment.Moment> = []
 	while(daysInMonth) {
-		arrDays.push(moment().date(daysInMonth))
+		arrDays.push(moment().month(month).date(daysInMonth))
 		daysInMonth--
 	}
 	return arrDays.reverse();
 }
 
-export const getDaysOfTheWeek = (): elementsOfDayType[] => {
-	const daysInMonth: Array<moment.Moment> = getDaysArrayByMonth()
+export const getDaysOfTheMonth = (month): elementsOfDayType[] => {
+	const daysInMonth: Array<moment.Moment> = getDaysArrayByMonth(month)
 	const daysOfTheWeek: elementsOfDayType[] = []
 	for(let el of daysInMonth) {
 		daysOfTheWeek.push({

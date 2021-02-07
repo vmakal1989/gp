@@ -5,7 +5,7 @@ import {KeyboardDatePicker, MuiPickersUtilsProvider} from "@material-ui/pickers"
 import {createMuiTheme, ThemeProvider} from "@material-ui/core"
 import {amber} from "@material-ui/core/colors"
 import style from './ChooseDate.module.css'
-import calendar from '../../assets/images/calendar.svg'
+import calendar from '../../assets/images/svg/calendar.svg'
 import { useHistory } from "react-router-dom";
 
 type PropsType = {}
