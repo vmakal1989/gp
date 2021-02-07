@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import {NavLink } from 'react-router-dom'
 import style from './Notepad.module.css'
 import { DatesDataType } from './NotepadContainer'
 import NotepadRowContainer from "./NotepadRow/NotepadRowContainer"
@@ -7,13 +7,12 @@ import NotepadRowContainer from "./NotepadRow/NotepadRowContainer"
 type PropsType = {
     date: string | string[]
     datesData: DatesDataType
-    toggleCurrentPeriod: (type: string) => void
     hours: Array<string>
     getTitle: (string) => void
 }
 
 
-export const Notepad: React.FC<PropsType> = ({date, datesData,toggleCurrentPeriod, hours, getTitle}) => {
+export const Notepad: React.FC<PropsType> = ({date, datesData, hours, getTitle}) => {
 
     const renderNotepadRow = () => {
         return datesData.current ?
@@ -25,7 +24,7 @@ export const Notepad: React.FC<PropsType> = ({date, datesData,toggleCurrentPerio
     return (
         <div className={style.container}>
             <div className={style.notepad}>
-                <Link to='/' className={style.log_out} onClick={() => toggleCurrentPeriod('week')}> </Link>
+                <NavLink to='/' className={style.log_out} />
                 {date.length === 1 ? <div className={style.title}>{date}</div> :
                     datesData.data.length === 0 ? <div className={style.notepad__message}>There aren't notes in the specified range</div> : ''}
                 {renderNotepadRow()}

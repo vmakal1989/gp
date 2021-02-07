@@ -5,8 +5,6 @@ import {AppStateType} from "../../redux/store-redux";
 import {removeSessions} from "../../redux/auth-reducer";
 
 type OwnProps ={
-	currentPeriod: string
-	toggleCurrentPeriod: (type: string) => void
 	setShowSelectedDates: (type: boolean) => void
 	showSelectedDates: boolean
 }

@@ -7,32 +7,32 @@
 }
 
 .item {
-    width: calc(40px + 150 * ((100vw - 320px) / 1200 ));
-    height: calc(60px + 160 * ((100vw - 320px) / 1200 ));
+    width: calc(40px + 138 * ((100vw - 320px) / 1200 ));
+    height: calc(60px + 117 * ((100vw - 320px) / 1200 ));
     cursor: pointer;
     box-shadow: 0 0 5px #e0e0e0;
-    border-radius: 2px;
+    border-radius: 5px;
     margin: calc(5px + 1 * ((100vw - 320px) / 1200 )) calc(2px + 3 * ((100vw - 320px) / 1200 ));
     background: #ffffff;
     padding-top: 1px;
 }
 .current {
-    box-shadow: 0 0 calc(5px + 15 * ((100vw - 320px) / 1200 )) orangered;
+    box-shadow: inset 0 0 calc(10px + 10 * ((100vw - 320px) / 1200 )) 0 #ffd700;
 }
 
 .nameOfDay, .number, .note {
-    margin-top: calc(5px + 5 * ((100vw - 320px) / 1200 ));
-    font-size: calc(7px + 25 * ((100vw - 320px) / 1200 ));
+    margin-top: calc(5px + 4 * ((100vw - 320px) / 1200 ));
+    font-size: calc(7px + 18 * ((100vw - 320px) / 1200 ));
     font-weight: bold;
     text-align: center;
     opacity: .7;
 }
 .number {
-    font-size: calc(20px + 60 * ((100vw - 320px) / 1200 ));
+    font-size: calc(20px + 51 * ((100vw - 320px) / 1200 ));
 }
 .note {
-    margin-top: calc(5px + 10 * ((100vw - 320px) / 1200 ));
-    font-size: calc(8px + 18 * ((100vw - 320px) / 1200 ));
+    margin-top: calc(5px + 0 * ((100vw - 320px) / 1200 ));
+    font-size: calc(8px + 16 * ((100vw - 320px) / 1200 ));
 }
 .isHoliday {
     color: red;
@@ -48,4 +48,7 @@
 .current .number,
 .current .note {
     opacity: .9;
+}
+.item:active {
+    transform: scale(.9);
 }

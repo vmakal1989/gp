@@ -8,7 +8,7 @@ import preloader from "../../assets/images/preloader.svg";
 export const ReduxSignUpForm = ({handleSubmit, error, isFetching}) => {
     return (
         <div className={style.sign_up_container}>
-            <div className={style.title}>Sign Up</div>
+            <div className={style.title}>Registration</div>
             <form onSubmit={handleSubmit}>
                 <div className={style.flex_box}>
                     <div className={style.flex_field}>
