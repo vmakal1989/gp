@@ -13,7 +13,7 @@ import { useEffect } from 'react'
 import firebase from "firebase"
 import {initializedUser} from "./redux/auth-reducer"
 import {getNotes} from "./redux/notes-reducer"
-import Calendar from "./components/Calendar/Calendar"
+import CalendarContainer from "./components/Calendar/CalendarContainer"
 
 
 const App = (props) => {
@@ -34,7 +34,7 @@ const App = (props) => {
             <div className={classNames('dates__popup', showSelectedDates ? 'dates__popup_active' : '')}>
                 <SelectDates setShowSelectedDates={setShowSelectedDates} />
             </div>
-            <Route path='/' exact render={() => <Calendar />}/>
+            <Route path='/' exact render={() => <CalendarContainer />}/>
             <Route path='/notepad' render={() => <NotepadContainer date={getNotepadTitle(props.location.pathname)}/>}/>
             <Route path='/login' render={() => <LoginFormContainer />}/>
             <Route path='/signup' render={() => <SignUpFormContainer />}/>

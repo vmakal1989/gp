@@ -36,7 +36,7 @@ const NotepadRowContainer: React.FC<NotepadRowContainerType> = (props) => {
 			props.addNewNote(props.date[0], props.hour, noteFieldValue)
 		prevFieldValue && prevFieldValue !== noteFieldValue && noteFieldValue.trim() &&
 			props.editNote(props.noteData.id, props.date[0], props.hour, noteFieldValue)
-		prevFieldValue && !noteFieldValue && !noteFieldValue.trim() &&
+		prevFieldValue && !noteFieldValue.trim() &&
 			props.removeNote(props.noteData.id)
 	}
 

@@ -1,5 +1,5 @@
 
-export interface elementsOfDayType {
+export interface ElementsOfDayType {
     name: string
     number: number | string
     current: boolean

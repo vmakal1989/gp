@@ -1,4 +1,4 @@
-import {elementsOfDayType} from "../../types/types"
+import {ElementsOfDayType} from "../../types/types"
 import moment from "moment"
 
 const isHoliday = (name: string): boolean => {
@@ -15,9 +15,9 @@ const getDaysArrayByMonth = (month): Array<moment.Moment>  => {
 	return arrDays.reverse();
 }
 
-export const getDaysOfTheMonth = (month): elementsOfDayType[] => {
+export const getDaysOfTheMonth = (month): ElementsOfDayType[] => {
 	const daysInMonth: Array<moment.Moment> = getDaysArrayByMonth(month)
-	const daysOfTheWeek: elementsOfDayType[] = []
+	const daysOfTheWeek: ElementsOfDayType[] = []
 	for(let el of daysInMonth) {
 		daysOfTheWeek.push({
 			name: el.format('dddd'),

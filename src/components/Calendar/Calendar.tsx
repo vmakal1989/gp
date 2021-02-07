@@ -1,17 +1,15 @@
 import React from 'react'
-import {getDaysOfTheMonth} from "../../helpers/getDays/getDays"
 import Day from "./Day/Day"
 import style from "./Calendar.module.css"
-import { useState } from 'react'
 import moment from 'moment'
+import {ElementsOfDayType} from "../../types/types";
 
-type PropsType = {}
-const Calendar: React.FC<PropsType> = () => {
-    let [month, setMonth] = useState<number>(moment().month())
-    const toggleMonth = (type: string): void => {
-        type === 'decrement' && setMonth(--month)
-        type === 'increment' && setMonth(++month)
-    }
+type PropsType = {
+    toggleMonth: (type: string) => void
+    month: number
+    structurePage: Array<ElementsOfDayType>
+}
+const Calendar: React.FC<PropsType> = ({toggleMonth, month, structurePage}) => {
     return (
         <div className={style.container}>
             <div className={style.navContainer}>
@@ -24,7 +22,7 @@ const Calendar: React.FC<PropsType> = () => {
                 </div>
             </div>
             <div className={style.items}>
-                { getDaysOfTheMonth(month).map(day => <Day key={day.date} day={day}/>)}
+                { structurePage.map(day => <Day key={day.date} day={day}/>)}
             </div>
         </div>
 
