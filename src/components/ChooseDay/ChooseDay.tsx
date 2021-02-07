@@ -5,14 +5,12 @@ import {KeyboardDatePicker, MuiPickersUtilsProvider} from "@material-ui/pickers"
 import {createMuiTheme, ThemeProvider} from "@material-ui/core"
 import {amber} from "@material-ui/core/colors"
 import style from './ChooseDate.module.css'
-import calendar from '../../assets/images/calendar.svg'
+import calendar from '../../assets/images/svg/calendar.svg'
 import { useHistory } from "react-router-dom";
 
-type PropsType = {
-	toggleCurrentPeriod: (type: string) => void
-}
+type PropsType = {}
 
-const ChooseDay: React.FC<PropsType> = ({toggleCurrentPeriod}) => {
+const ChooseDay: React.FC<PropsType> = () => {
 	const [day, setDay] = useState<moment.Moment | null>(moment())
 	const [open, setOpen] = useState<boolean>(false)
 	const history = useHistory();
@@ -20,7 +18,6 @@ const ChooseDay: React.FC<PropsType> = ({toggleCurrentPeriod}) => {
 	const openDate = (e: moment.Moment | null): void => {
 		e && history.push(`/notepad/${e.format('DD.MM.YYYY')}`)
 		setOpen(false)
-		toggleCurrentPeriod('choose date')
 	}
 
 	const defaultMaterialTheme: object = createMuiTheme({

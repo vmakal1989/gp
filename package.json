@@ -36,6 +36,7 @@
     "redux": "^4.0.5",
     "redux-form": "^8.3.7",
     "redux-thunk": "^2.3.0",
+    "ungit": "^1.5.15",
     "web-vitals": "^0.2.4"
   },
   "scripts": {

@@ -9,10 +9,9 @@ import {Link} from 'react-router-dom'
 
 interface propsType {
 	setShowSelectedDates: (type: boolean) => void
-	toggleCurrentPeriod: (type: string) => void
 }
 
-export const SelectDates: FunctionComponent<propsType> = ({setShowSelectedDates, toggleCurrentPeriod}) => {
+export const SelectDates: FunctionComponent<propsType> = ({setShowSelectedDates}) => {
 	const [dateOne, changeDateOne] = useState<null | object>(moment())
 	const [dateTwo, changeDateTwo] = useState<null | object>(moment())
 	const [isValidDates, setValidDates] = useState<boolean>(true)
@@ -27,12 +26,7 @@ export const SelectDates: FunctionComponent<propsType> = ({setShowSelectedDates,
 		}
 	})
 
-	const handleSubmit = (): void => {
-		if(isValidDates) {
-			setShowSelectedDates(false)
-			toggleCurrentPeriod('show notes')
-		}
-	}
+	const handleSubmit = (): void => { isValidDates && setShowSelectedDates(false) }
 
 	return (
 		<div className={style.dates__wrapper}>
