@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/gp/static/css/main.019870cd.chunk.css",
-    "main.js": "/gp/static/js/main.008e2db9.chunk.js",
-    "main.js.map": "/gp/static/js/main.008e2db9.chunk.js.map",
-    "runtime-main.js": "/gp/static/js/runtime-main.cde518cd.js",
-    "runtime-main.js.map": "/gp/static/js/runtime-main.cde518cd.js.map",
-    "static/js/2.98bb705a.chunk.js": "/gp/static/js/2.98bb705a.chunk.js",
-    "static/js/2.98bb705a.chunk.js.map": "/gp/static/js/2.98bb705a.chunk.js.map",
-    "static/js/3.b25aec71.chunk.js": "/gp/static/js/3.b25aec71.chunk.js",
-    "static/js/3.b25aec71.chunk.js.map": "/gp/static/js/3.b25aec71.chunk.js.map",
+    "main.css": "/gp/static/css/main.d147ac37.chunk.css",
+    "main.js": "/gp/static/js/main.b7a05998.chunk.js",
+    "main.js.map": "/gp/static/js/main.b7a05998.chunk.js.map",
+    "runtime-main.js": "/gp/static/js/runtime-main.21d29f6c.js",
+    "runtime-main.js.map": "/gp/static/js/runtime-main.21d29f6c.js.map",
+    "static/js/2.98b8b10a.chunk.js": "/gp/static/js/2.98b8b10a.chunk.js",
+    "static/js/2.98b8b10a.chunk.js.map": "/gp/static/js/2.98b8b10a.chunk.js.map",
+    "static/js/3.7c9d2a49.chunk.js": "/gp/static/js/3.7c9d2a49.chunk.js",
+    "static/js/3.7c9d2a49.chunk.js.map": "/gp/static/js/3.7c9d2a49.chunk.js.map",
     "index.html": "/gp/index.html",
-    "static/css/main.019870cd.chunk.css.map": "/gp/static/css/main.019870cd.chunk.css.map",
-    "static/js/2.98bb705a.chunk.js.LICENSE.txt": "/gp/static/js/2.98bb705a.chunk.js.LICENSE.txt",
-    "static/media/calendar.1c75522b.svg": "/gp/static/media/calendar.1c75522b.svg",
+    "static/css/main.d147ac37.chunk.css.map": "/gp/static/css/main.d147ac37.chunk.css.map",
+    "static/js/2.98b8b10a.chunk.js.LICENSE.txt": "/gp/static/js/2.98b8b10a.chunk.js.LICENSE.txt",
+    "static/media/calendar.521f8e7d.svg": "/gp/static/media/calendar.521f8e7d.svg",
     "static/media/index.css": "/gp/static/media/kosmonavt.0491f1ed.jpg",
     "static/media/Notepad.module.css": "/gp/static/media/log-out.b5cc819c.svg",
     "static/media/preloader.fd866770.svg": "/gp/static/media/preloader.fd866770.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.cde518cd.js",
-    "static/js/2.98bb705a.chunk.js",
-    "static/css/main.019870cd.chunk.css",
-    "static/js/main.008e2db9.chunk.js"
+    "static/js/runtime-main.21d29f6c.js",
+    "static/js/2.98b8b10a.chunk.js",
+    "static/css/main.d147ac37.chunk.css",
+    "static/js/main.b7a05998.chunk.js"
   ]
 }
