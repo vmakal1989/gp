@@ -19,7 +19,7 @@ export const ReduxLoginForm = ({handleSubmit, error, isFetching}) => {
                 { error && <div className={style.submitError}>{error.message}</div> }
                 <div className={style.nav_box}>
                     <NavLink to='/signup' className={style.link} >Sign Up</NavLink>
-                    <button className={style.submit} disabled={isFetching}>
+                    <button className={style.button} disabled={isFetching}>
                         {isFetching ?
                             <img className={style.preloader} src={preloader} alt={preloader}/>
                             :

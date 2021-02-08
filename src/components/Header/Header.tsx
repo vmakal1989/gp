@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 import ChooseDay from '../ChooseDay/ChooseDay'
 import { PropsType } from './HeaderContainer'
 
-export const Header: FunctionComponent<PropsType> = ({setShowSelectedDates,showSelectedDates, isAuth, removeSessions}) => {
+export const Header: FunctionComponent<PropsType> = ({setShowSelectedDates,showSelectedDates, isAuth, setShowConfirmWindow}) => {
 	return (
 		<nav className={style.container}>
 			<ul className={style.items}>
@@ -40,7 +40,7 @@ export const Header: FunctionComponent<PropsType> = ({setShowSelectedDates,showS
 							<li>Log In</li>
 						</NavLink>
 					:
-						<li className={classNames([style.link, style.item, style.item_login])} onClick={removeSessions}>Sign out</li>
+						<li className={classNames([style.link, style.item, style.item_login])} onClick={setShowConfirmWindow}>Sign out</li>
 				}
 
 			</ul>

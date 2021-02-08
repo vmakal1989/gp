@@ -14,6 +14,7 @@ import firebase from "firebase"
 import {initializedUser} from "./redux/auth-reducer"
 import {getNotes} from "./redux/notes-reducer"
 import CalendarContainer from "./components/Calendar/CalendarContainer"
+import ConfirmWindow from './components/ConfirmWindow/ConfirmWindow'
 
 
 const App = (props) => {
@@ -27,17 +28,23 @@ const App = (props) => {
 
     const getNotepadTitle = (pathname: string): Array<string> => pathname.split('/')[2].split('-')
     const [showSelectedDates, setShowSelectedDates] = useState<boolean>(false)
+    const [showConfirmWindow, setShowConfirmWindow] = useState<boolean>(false)
 
     return (
-        <div className='app'>
-            <HeaderContainer setShowSelectedDates={setShowSelectedDates} showSelectedDates={showSelectedDates}/>
-            <div className={classNames('dates__popup', showSelectedDates ? 'dates__popup_active' : '')}>
-                <SelectDates setShowSelectedDates={setShowSelectedDates} />
+        <div className={'app'}>
+            <div className={showConfirmWindow ? 'blur' : ''}>
+                <HeaderContainer setShowSelectedDates={setShowSelectedDates}
+                                 showSelectedDates={showSelectedDates}
+                                 setShowConfirmWindow={setShowConfirmWindow}/>
+                <div className={classNames('dates__popup', showSelectedDates ? 'dates__popup_active' : '')}>
+                    <SelectDates setShowSelectedDates={setShowSelectedDates} />
+                </div>
+                <Route path='/' exact render={() => <CalendarContainer />}/>
+                <Route path='/notepad' render={() => <NotepadContainer date={getNotepadTitle(props.location.pathname)}/>}/>
+                <Route path='/login' render={() => <LoginFormContainer />}/>
+                <Route path='/signup' render={() => <SignUpFormContainer />}/>
             </div>
-            <Route path='/' exact render={() => <CalendarContainer />}/>
-            <Route path='/notepad' render={() => <NotepadContainer date={getNotepadTitle(props.location.pathname)}/>}/>
-            <Route path='/login' render={() => <LoginFormContainer />}/>
-            <Route path='/signup' render={() => <SignUpFormContainer />}/>
+            { showConfirmWindow && <ConfirmWindow setShowConfirmWindow={setShowConfirmWindow} /> }
         </div>
     )
 }

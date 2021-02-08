@@ -29,7 +29,7 @@ export const SelectDates: FunctionComponent<propsType> = ({setShowSelectedDates}
 	const handleSubmit = (): void => { isValidDates && setShowSelectedDates(false) }
 
 	return (
-		<div className={style.dates__wrapper}>
+		<div className={style.dates__wrapper} onMouseLeave={() => setShowSelectedDates(false)}>
 			<div className={style.dates__title}>Set interval dates</div>
 			<div className={style.dates__container}>
 				<ThemeProvider theme={defaultMaterialTheme}>
