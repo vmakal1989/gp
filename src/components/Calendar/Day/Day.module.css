@@ -8,7 +8,7 @@
 
 .item,
 .clearItem {
-    width: calc(40px + 150 * ((1200px - 320px) / 1200 ));
+    width: calc(40px + 160 * ((1200px - 320px) / 1200 ));
     height: calc(60px + 130 * ((1200px - 320px) / 1200 ));
     cursor: pointer;
     box-shadow: 0 0 5px #e0e0e0;
@@ -62,7 +62,7 @@
 @media(max-width: 1200px) {
     .item,
     .clearItem {
-        width: calc(40px + 138 * ((100vw - 320px) / 1200 ));
+        width: calc(40px + 150 * ((100vw - 320px) / 1200 ));
         height: calc(60px + 117 * ((100vw - 320px) / 1200 ));
         margin: calc(5px + 1 * ((100vw - 320px) / 1200 )) calc(2px + 3 * ((100vw - 320px) / 1200 ));
     }
