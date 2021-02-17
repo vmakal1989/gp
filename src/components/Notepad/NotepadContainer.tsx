@@ -1,7 +1,7 @@
 import React from "react"
 import {AppStateType} from "../../redux/store-redux"
 import moment from "moment"
-import {noteType} from "../../types/types"
+import {NoteType} from "../../types/types"
 import {connect} from "react-redux"
 import {Notepad} from "./Notepad"
 import { Redirect } from "react-router-dom"
@@ -16,7 +16,7 @@ type MapStatePropsType = {
 }
 export type DatesDataType ={
 	current: boolean
-	data: Array<noteType>
+	data: Array<NoteType>
 }
 
 type PropsType = MapStatePropsType & OwnProps
@@ -52,7 +52,7 @@ const getDatesData = (state: AppStateType, date: Array<string>): DatesDataType =
 			if(moment(noteDate).isBetween(dateOne, dateTwo, undefined, '[]')) datesData.data.push(el)
 		}
 		datesData.data.sort((a: any, b: any) => a.time-b.time)
-		datesData.data.sort((a: noteType,b: noteType) => {
+		datesData.data.sort((a: NoteType, b: NoteType) => {
 			// @ts-ignore
 			return moment(a.date.split('.').reverse().join('-'))-moment(b.date.split('.').reverse().join('-'))
 		})

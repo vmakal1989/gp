@@ -3,7 +3,7 @@ import {firebaseUserAPI } from "../firebase/firebase"
 import {clearNotesState, getNotes } from "./notes-reducer"
 import {ThunkAction} from "redux-thunk"
 import {AppStateType} from "./store-redux"
-import { Dispatch } from "redux"
+import {UserType} from "../types/types";
 
 const NEW_SESSIONS: string = 'AUTH/NEW_SESSIONS'
 const REMOVE_SESSIONS: string = 'AUTH/REMOVE_SESSIONS'
@@ -15,14 +15,6 @@ type InitialStateType = {
 	isAuth: boolean
 	isFetching: boolean
 }
-type UserType ={
-	id: null | string
-	firstName: null | string
-	lastName: null | string
-	email: null | string
-	role: null | string
-}
-
 const initialState: InitialStateType = {
 	user: {
 		id: null,

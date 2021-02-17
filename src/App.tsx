@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {Suspense, useState} from 'react'
 import './App.css'
 import HeaderContainer from "./components/Header/HeaderContainer"
 import NotepadContainer from "./components/Notepad/NotepadContainer"
@@ -15,6 +15,7 @@ import {initializedUser} from "./redux/auth-reducer"
 import CalendarContainer from "./components/Calendar/CalendarContainer"
 import ConfirmWindow from './components/ConfirmWindow/ConfirmWindow'
 
+const AdminContainer = React.lazy(() => import("./components/Admin/AdminContainer"))
 
 const App = (props) => {
     useEffect(()=> {
@@ -41,6 +42,10 @@ const App = (props) => {
                 <Route path='/notepad' render={() => <NotepadContainer date={getNotepadTitle(props.location.pathname)}/>}/>
                 <Route path='/login' render={() => <LoginFormContainer />}/>
                 <Route path='/signup' render={() => <SignUpFormContainer />}/>
+                <Suspense fallback={<div>Загрузка...</div>}>
+                    <Route path='/admin' render={() => <AdminContainer />}/>
+                </Suspense>
+
             </div>
             { showConfirmWindow && <ConfirmWindow setShowConfirmWindow={setShowConfirmWindow} /> }
         </div>

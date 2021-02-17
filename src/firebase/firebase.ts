@@ -22,6 +22,9 @@ export const firebaseUserAPI = {
 		let updates = {};
 		updates[`users/${userId}`] = updateData;
 		return firebase.database().ref().update(updates);
+	},
+	getUsers() {
+		return firebase.database().ref(`users`).once('value')
 	}
 }
 export const firebaseNotesAPI = {

@@ -1,4 +1,4 @@
-import {noteType} from "../types/types"
+import {NoteType} from "../types/types"
 import {firebaseNotesAPI} from "../firebase/firebase";
 import { ThunkAction } from "redux-thunk";
 import {AppStateType} from "./store-redux";
@@ -10,16 +10,16 @@ const REMOVE_NOTE: string = 'NOTES/REMOVE_NOTE'
 const CLEAR_NOTES_STATE: string = 'NOTES/CLEAR_NOTES_STATE'
 
 
-const initialState: noteType[] = []
+const initialState: NoteType[] = []
 
-export const notesReducer = (state=initialState, action: ActionTypes): noteType[] => {
+export const notesReducer = (state=initialState, action: ActionTypes): NoteType[] => {
     switch (action.type) {
         case SET_NOTES:
-            let newState: noteType[] = []
+            let newState: NoteType[] = []
             for(let key in action.notes) newState.push({id: key, ...action.notes[key]})
             return newState
         case ADD_NOTE:
-            const newNote: noteType = {
+            const newNote: NoteType = {
                 id: action.id,
                 userId: action.userId,
                 date : action.date,

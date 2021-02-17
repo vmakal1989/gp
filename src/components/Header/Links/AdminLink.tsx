@@ -12,7 +12,7 @@ const AdminLink: React.FC<PropsType> = ({userRole}) => {
 
 	if(userRole !== 'admin')  return <></>
 	return (
-		<NavLink className={classNames([style.link, style.item, style.item_admin])}
+		<NavLink className={classNames([style.link, style.item])}
 				 activeClassName={style.item_current} exact to="/admin">
 			<li>Admin</li>
 		</NavLink>

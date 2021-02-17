@@ -3,11 +3,13 @@ import {notesReducer} from './notes-reducer'
 import {reducer as formReducer} from 'redux-form'
 import {authReducer} from "./auth-reducer"
 import thunk from 'redux-thunk';
+import { usersReducer } from './users-reducer';
 
 const rootReducer = combineReducers({
     notes: notesReducer,
     auth: authReducer,
-    form: formReducer
+    form: formReducer,
+    users: usersReducer
 })
 
 type RootReducerType = typeof rootReducer
