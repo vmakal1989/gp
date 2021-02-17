@@ -3,11 +3,11 @@ import {firebaseUserAPI } from "../firebase/firebase"
 import {clearNotesState, getNotes } from "./notes-reducer"
 import {ThunkAction} from "redux-thunk"
 import {AppStateType} from "./store-redux"
+import { Dispatch } from "redux"
 
 const NEW_SESSIONS: string = 'AUTH/NEW_SESSIONS'
 const REMOVE_SESSIONS: string = 'AUTH/REMOVE_SESSIONS'
 const TOGGLE_IS_FETCHING: string = 'AUTH/TOGGLE_IS_FETCHING'
-const INITIALIZED_USER: string = 'AUTH/INITIALIZED_USER'
 
 
 type InitialStateType = {
@@ -20,6 +20,7 @@ type UserType ={
 	firstName: null | string
 	lastName: null | string
 	email: null | string
+	role: null | string
 }
 
 const initialState: InitialStateType = {
@@ -27,7 +28,8 @@ const initialState: InitialStateType = {
 		id: null,
 		firstName: null,
 		lastName: null,
-		email: null
+		email: null,
+		role: null
 	},
 	isAuth: false,
 	isFetching: false
@@ -38,27 +40,25 @@ export const authReducer = (state = initialState, action: ActionTypes): InitialS
 	switch(action.type) {
 		case  NEW_SESSIONS:
 			return {...state, isAuth: true,
-				   user: {...state.user, id: action.id, firstName: action.firstName, lastName: action.lastName, email: action.email}}
+				   user: {...state.user, id: action.id, firstName: action.firstName, lastName: action.lastName, email: action.email, role: action.role}}
 		case  REMOVE_SESSIONS:
 			return {...state, isAuth: false,
-					user: {...state.user, id: null, firstName: null, lastName: null, email: null}}
+					user: {...state.user, id: null, firstName: null, lastName: null, email: null, role: null}}
 		case  TOGGLE_IS_FETCHING:
 			return {...state, isFetching: action.isFetching}
-		case INITIALIZED_USER:
-			return {...state, isAuth: true,
-				user: {...state.user, id: action.id, email: action.email}}
 		default:
 			return state
 	}
 }
 
-type ActionTypes = NewSessionsType & RemoveSessionsType & ToggleIsFetchingType & InitializedUser
+type ActionTypes = NewSessionsType & RemoveSessionsType & ToggleIsFetchingType
 type NewSessionsType = {
 	type: typeof NEW_SESSIONS
 	id: null | string
 	firstName: null | string
 	lastName: null | string
 	email: null | string
+	role: null | string
 }
 type RemoveSessionsType = {
 	type: typeof REMOVE_SESSIONS
@@ -67,28 +67,35 @@ type ToggleIsFetchingType ={
 	type: typeof TOGGLE_IS_FETCHING
 	isFetching: boolean
 }
-type InitializedUser = {
-	type: typeof INITIALIZED_USER
-	id: string
-	email: string | null
-}
 
-export const initializedUser = (id: string, email: string | null): InitializedUser => ({type: INITIALIZED_USER, id, email})
-const newSessionsAC = (id: string, firstName: string, lastName: string, email: string): NewSessionsType => (
-	{type: NEW_SESSIONS, id, firstName, lastName, email}
+const newSessionsAC = (id: string, firstName: string, lastName: string, email: string, role: string): NewSessionsType => (
+	{type: NEW_SESSIONS, id, firstName, lastName, email, role}
 )
 const removeSessionsAC = (): RemoveSessionsType => ({type: REMOVE_SESSIONS})
 export const toggleIsFetchingAC = (isFetching : boolean): ToggleIsFetchingType => ({type: TOGGLE_IS_FETCHING, isFetching})
 
+const getUserProfile =  (userId: string, dispatch): void  => {
+	 firebaseUserAPI.getUserProfile(userId)
+		.then(response => {
+			let {email, firstName, lastName, role} = response.val()
+			dispatch(<ActionTypes>newSessionsAC(userId, firstName, lastName, email, role))
+			dispatch(getNotes(userId))
+		})
+}
+
 export const signUp = (firstName: string, lastName: string, email: string, password: string): ThunkAction<void, AppStateType, unknown, ActionTypes> => {
 	return (dispatch) => {
 	    dispatch(<ActionTypes>toggleIsFetchingAC(true))
-		firebaseUserAPI.createAccount(firstName, lastName, email, password)
+		firebaseUserAPI.createAccount(email, password)
 			.then((response) => {
 				if(response.user) {
 					let id = response.user.uid
-					dispatch(<ActionTypes>newSessionsAC(id, 'firstName', 'lastName', email))
-					dispatch(<ActionTypes>toggleIsFetchingAC(false))
+					let role = 'user'
+					firebaseUserAPI.setUserProfile(id, email, firstName, lastName, role)
+						.then(() => {
+							dispatch(<ActionTypes>newSessionsAC(id, firstName, lastName, email, role))
+							dispatch(<ActionTypes>toggleIsFetchingAC(false))
+						})
 				}
 			})
 			.catch(error => {
@@ -97,6 +104,9 @@ export const signUp = (firstName: string, lastName: string, email: string, passw
 			})
 	}
 }
+export const initializedUser = (id: string): ThunkAction<void, AppStateType, unknown, ActionTypes> => {
+	return async (dispatch) => await getUserProfile(id, dispatch)
+}
 export const newSessions = (email: string, password: string): ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes> => {
 	return async (dispatch) => {
 		dispatch(<ActionTypes>toggleIsFetchingAC(true))
@@ -104,8 +114,7 @@ export const newSessions = (email: string, password: string): ThunkAction<Promis
 			.then((response) => {
 				if(response.user) {
 					let id = response.user.uid
-					dispatch(<ActionTypes>newSessionsAC(id, 'test', 'test', email))
-					dispatch(getNotes(id))
+					getUserProfile(id, dispatch)
 					dispatch(<ActionTypes>toggleIsFetchingAC(false))
 				}
 			})

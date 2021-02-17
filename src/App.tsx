@@ -12,7 +12,6 @@ import SignUpFormContainer from "./components/SignUp/SignUpContainer"
 import { useEffect } from 'react'
 import firebase from "firebase"
 import {initializedUser} from "./redux/auth-reducer"
-import {getNotes} from "./redux/notes-reducer"
 import CalendarContainer from "./components/Calendar/CalendarContainer"
 import ConfirmWindow from './components/ConfirmWindow/ConfirmWindow'
 
@@ -20,9 +19,8 @@ import ConfirmWindow from './components/ConfirmWindow/ConfirmWindow'
 const App = (props) => {
     useEffect(()=> {
         firebase.auth().onAuthStateChanged((user) => {
-            user && store.dispatch(initializedUser(user.uid, user.email))
             // @ts-ignore
-            user && store.dispatch(getNotes(user.uid))
+            user && store.dispatch(initializedUser(user.uid))
         })
     },[])
 

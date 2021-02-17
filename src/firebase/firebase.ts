@@ -1,7 +1,7 @@
 import firebase from 'firebase'
 
 export const firebaseUserAPI = {
-	createAccount(firstName: string, lastName: string, email: string, password: string) {
+	createAccount(email: string, password: string) {
 		return firebase.auth().createUserWithEmailAndPassword(email, password)
 	},
 	newSession(email: string, password: string) {
@@ -10,6 +10,18 @@ export const firebaseUserAPI = {
 	},
 	removeSession() {
 		return firebase.auth().signOut()
+	},
+	setUserProfile(userId: string, email: string, firstName: string, lastName: string, role: string) {
+		return firebase.database().ref(`users/${userId}`).set({email, firstName, lastName, role})
+	},
+	getUserProfile(userId) {
+		return firebase.database().ref(`users/${userId}`).once('value')
+	},
+	editUserProfile(userId, firstName, lastName) {
+		let updateData = {userId, firstName, lastName,}
+		let updates = {};
+		updates[`users/${userId}`] = updateData;
+		return firebase.database().ref().update(updates);
 	}
 }
 export const firebaseNotesAPI = {
