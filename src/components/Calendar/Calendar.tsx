@@ -2,7 +2,7 @@ import React from 'react'
 import Day from "./Day/Day"
 import style from "./Calendar.module.css"
 import moment from 'moment'
-import {ElementsOfDayType} from "../../types/types";
+import {ElementsOfDayType} from "../../types/types"
 
 type PropsType = {
     toggleMonth: (type: string) => void

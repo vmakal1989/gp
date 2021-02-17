@@ -10,6 +10,7 @@ type OwnProps ={
 }
 type MapStatePropsType = {
 	isAuth: boolean
+	userRole: string | null
 }
 type MapDispatchPropsType = {}
 
@@ -23,7 +24,8 @@ const HeaderContainer: React.FC<PropsType> = (props) => {
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
 	return {
-		isAuth: state.auth.isAuth
+		isAuth: state.auth.isAuth,
+		userRole: state.auth.user.role
 	}
 }
 
