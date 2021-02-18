@@ -1,5 +1,109 @@
 .container {
     width: 100%;
-    height: 100vh;
-    overflow-y: hidden;
+    height: 100%;
+    display: flex;
+    border-radius: 10px;
+    margin-top: 10px;
+    background-color: #ffffff;
+    opacity: .9;
+    justify-content: center;
+}
+.users__container {
+    min-width: 700px;
+    padding: 10px;
+}
+.users__tittle {
+    width: 100%;
+    text-align: center;
+    font-size: 48px;
+    color: #ff6f00;
+}
+.user__containerHeader,
+.user__container {
+    display: flex;
+    width: 100%;
+    font-size: 20px;
+    text-align: center;
+    word-wrap: break-word;
+    border-bottom: 1px solid #000000;
+}
+.user__container {
+    font-size: 17px;
+    position: relative;
+    border-bottom: 1px solid #e0e0e0;
+}
+.user__email {
+    width: 200px;
+}
+.user__firstName,
+.user__lastName {
+    width: 150px;
+}
+.user__notes,
+.user__edit {
+    width: 60px;
+}
+.user__email,
+.user__firstName,
+.user__lastName,
+.user__notes,
+.user__edit {
+     padding: 10px 5px;
+}
+.user__editLink:hover,
+.user__notesLink:hover {
+    color: #ff8f00;
+    cursor: pointer;
+}
+.user__editWindowNone {
+    display: none;
+}
+.user__editWindow {
+    width: 460px;
+    height: 30px;
+    background-color: #ffffff;
+    position: absolute;
+    top: 0;
+    left: 200px;
+    border-radius: 3px;
+    box-shadow: 0 0 5px #e0e0e0;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+.user_editInput {
+    height: 100%;
+    width: 150px;
+    border: none;
+    outline: none;
+    margin-right: 10px;
+    border-bottom: 2px solid #e0e0e0;
+    background-color: #ffffff;
+    font-size: 20px;
+    color: #000000;
+    padding: 2px 5px;
+    text-align: center;
+}
+.user_editInput:focus,
+.user_editInput:active,
+.user_editInput:hover {
+    border-bottom: 2px solid #ff8f00;
+}
+.btnSuccess img,
+.btnCancel img {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin-left: 15px;
+}
+.btnSuccess img {
+}
+
+.btnSuccess img:hover,
+.btnCancel img:hover {
+    transform: scale(1.05);
+}
+.btnSuccess img:active,
+.btnCancel img:active {
+    transform: scale(1);
 }

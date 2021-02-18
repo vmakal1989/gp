@@ -16,9 +16,9 @@ export interface NoteType {
 }
 
 export interface UserType {
-    id: null | string
-    firstName: null | string
-    lastName: null | string
-    email: null | string
-    role: null | string
+    id: string | null
+    firstName: string
+    lastName: string
+    email: string
+    role: string
 }

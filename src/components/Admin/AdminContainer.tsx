@@ -8,7 +8,7 @@ import {UserType} from "../../types/types";
 
 type PropsType = MapStateToPropsType & MapDispatchToPropsType
 type MapStateToPropsType = {
-	userRole: string | null
+	userRole: string
 	users: Array<UserType>
 }
 type MapDispatchToPropsType = {

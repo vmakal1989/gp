@@ -18,10 +18,10 @@ type InitialStateType = {
 const initialState: InitialStateType = {
 	user: {
 		id: null,
-		firstName: null,
-		lastName: null,
-		email: null,
-		role: null
+		firstName: '',
+		lastName: '',
+		email: '',
+		role: ''
 	},
 	isAuth: false,
 	isFetching: false
@@ -35,7 +35,7 @@ export const authReducer = (state = initialState, action: ActionTypes): InitialS
 				   user: {...state.user, id: action.id, firstName: action.firstName, lastName: action.lastName, email: action.email, role: action.role}}
 		case  REMOVE_SESSIONS:
 			return {...state, isAuth: false,
-					user: {...state.user, id: null, firstName: null, lastName: null, email: null, role: null}}
+					user: {...state.user, id: '', firstName: '', lastName: '', email: '', role: ''}}
 		case  TOGGLE_IS_FETCHING:
 			return {...state, isFetching: action.isFetching}
 		default:
@@ -47,10 +47,10 @@ type ActionTypes = NewSessionsType & RemoveSessionsType & ToggleIsFetchingType
 type NewSessionsType = {
 	type: typeof NEW_SESSIONS
 	id: null | string
-	firstName: null | string
-	lastName: null | string
-	email: null | string
-	role: null | string
+	firstName: string
+	lastName: string
+	email: string
+	role: string
 }
 type RemoveSessionsType = {
 	type: typeof REMOVE_SESSIONS

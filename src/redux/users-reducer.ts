@@ -35,3 +35,10 @@ export const getUsers = (): ThunkAction<Promise<void>, AppStateType, unknown, Ac
 	}
 }
 
+export const sendNewUserData = (userId, email, firstName, lastName, role): ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes> => {
+	return async (dispatch) => {
+		await firebaseUserAPI.editUserProfile(userId, email, firstName, lastName, role)
+			.then(() => dispatch(getUsers()))
+	}
+}
+

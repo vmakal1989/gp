@@ -17,8 +17,8 @@ export const firebaseUserAPI = {
 	getUserProfile(userId) {
 		return firebase.database().ref(`users/${userId}`).once('value')
 	},
-	editUserProfile(userId, firstName, lastName) {
-		let updateData = {userId, firstName, lastName,}
+	editUserProfile(userId: string, email: string, firstName: string, lastName: string, role: string) {
+		let updateData = {email, firstName, lastName, role}
 		let updates = {};
 		updates[`users/${userId}`] = updateData;
 		return firebase.database().ref().update(updates);
