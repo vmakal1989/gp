@@ -2,14 +2,16 @@ import {applyMiddleware, combineReducers, createStore} from 'redux'
 import {notesReducer} from './notes-reducer'
 import {reducer as formReducer} from 'redux-form'
 import {authReducer} from "./auth-reducer"
-import thunk from 'redux-thunk';
-import { usersReducer } from './users-reducer';
+import thunk from 'redux-thunk'
+import { usersReducer } from './users-reducer'
+import { userNotesReducer } from './userNotes-reducer'
 
 const rootReducer = combineReducers({
     notes: notesReducer,
     auth: authReducer,
     form: formReducer,
-    users: usersReducer
+    users: usersReducer,
+    userNotes: userNotesReducer
 })
 
 type RootReducerType = typeof rootReducer

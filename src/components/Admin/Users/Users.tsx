@@ -5,10 +5,14 @@ import User from './User'
 
 type PropsType = {
 	users: Array<UserType>
+	setShowNotes: (boolean) => void
+	getUserNotes: (id: string | null) => void
 }
 
-const Users: React.FC<PropsType> = ({users}) => {
-	const renderUser = users.map((user) => <User key={user.id} user={user}/> )
+const Users: React.FC<PropsType> = ({users, setShowNotes, getUserNotes}) => {
+	const renderUser = users.map((user) => <User key={user.id} user={user}
+												 		setShowNotes={setShowNotes}
+												 		getUserNotes={getUserNotes}/> )
 	return (
 		<div className={style.users__container}>
 			<div className={style.users__tittle}>Users</div>
@@ -19,7 +23,6 @@ const Users: React.FC<PropsType> = ({users}) => {
 				<div className={style.user__edit}>Edit</div>
 				<div className={style.user__notes}>Notes</div>
 			</div>
-
 			{renderUser}
 		</div>
 	)

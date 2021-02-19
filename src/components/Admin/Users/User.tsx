@@ -6,9 +6,11 @@ import UserEditWindow from "./UserEditWindow";
 
 type PropsType = {
 	user: UserType
+	setShowNotes: (boolean) => void
+	getUserNotes: (id: string | null) => void
 }
 
-const User: React.FC<PropsType> = ({user}) => {
+const User: React.FC<PropsType> = ({user, setShowNotes, getUserNotes}) => {
 	const [editUser, setEditUSer] = useState<boolean>(false)
 	return (
 		<div className={style.user__container}>
@@ -19,7 +21,13 @@ const User: React.FC<PropsType> = ({user}) => {
 				onClick={(event)=> setEditUSer(!editUser)}>
 				Edit
 			</div>
-			<div className={classNames([style.user__notes, style.user__notesLink]) }>Show</div>
+			<div className={classNames([style.user__notes, style.user__notesLink])}
+				onClick={()=> {
+					getUserNotes(user.id)
+					setShowNotes(true)
+				}}>
+				Show
+			</div>
 			{editUser && <UserEditWindow setEditUSer={setEditUSer} user={user}/>}
 		</div>
 	)

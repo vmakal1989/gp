@@ -1,6 +1,6 @@
 .container {
     width: 100%;
-    height: 100%;
+    min-height: 70px;
     display: flex;
     border-radius: 10px;
     margin-top: 10px;
@@ -8,8 +8,10 @@
     opacity: .9;
     justify-content: center;
 }
-.users__container {
-    min-width: 700px;
+.users__container,
+.user__notesContainer {
+    position: relative;
+    width: 700px;
     padding: 10px;
 }
 .users__tittle {
@@ -106,4 +108,110 @@
 .btnSuccess img:active,
 .btnCancel img:active {
     transform: scale(1);
+}
+.user__notesBtnOut {
+    width: 30px;
+    height: 30px;
+    background: url("../../assets/images/log-out.svg") no-repeat ;
+    background-size: cover;
+    position: absolute;
+    top: 20px;
+    left: 25px;
+    cursor: pointer;
+}
+.user__notesBtnOut:active {
+    transform: scale(.98);
+}
+.user__noteTitle {
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 24px;
+}
+.user__note {
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.user__noteTime {
+    line-height: 30px;
+    font-size: 18px;
+    color: #63316d;
+    margin-right: 5px;
+    padding: 0 10px;
+}
+
+.user__noteBody {
+    min-height: 30px;
+    line-height: 30px;
+    font-size: 20px;
+    padding: 0 10px;
+    word-break: break-word;
+    white-space: pre-line;
+}
+@media(max-width: 700px) {
+    .container {
+        border-radius: 0;
+        margin-top: 0;
+    }
+    .users__container,
+    .user__notesContainer {
+        width: 100%;
+        padding: 0;
+    }
+    .users__tittle {
+        font-size: 30px;
+    }
+    .user__containerHeader {
+        font-size: 16px;
+        padding: 0;
+    }
+    .user__container {
+        font-size: 15px;
+    }
+    .user__email {
+        width: 40%;
+    }
+    .user__firstName,
+    .user__lastName {
+        width: 20%;
+    }
+    .user__notes,
+    .user__edit {
+        width: 10%;
+    }
+    .user__email,
+    .user__firstName,
+    .user__lastName,
+    .user__notes,
+    .user__edit {
+        padding: 10px 1px;
+    }
+    .user__editWindow {
+        width: 100%;
+        left: -10px;
+        border-radius: 3px;
+        box-shadow: 0 0 5px #e0e0e0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 5px;
+    }
+    .user__notesBtnOut {
+        width: 25px;
+        height: 25px;
+        top: 12px;
+        left: 12px;
+    }
+    .user__noteTime {
+        line-height: 20px;
+        font-size: 14px;
+        margin-right: -10px;
+    }
+    .user__noteBody {
+        line-height: 20px;
+        font-size: 16px;
+    }
+}
+@media(max-width: 450px) {
 }

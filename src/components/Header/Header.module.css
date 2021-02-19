@@ -44,6 +44,9 @@
     margin-left: auto;
     display: flex;
 }
+.item_login {
+    padding: 0 5px;
+}
 
 @media(max-width: 510px) {
     .item:first-child {
