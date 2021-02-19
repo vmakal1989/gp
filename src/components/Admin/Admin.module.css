@@ -190,12 +190,7 @@
     .user__editWindow {
         width: 100%;
         left: -10px;
-        border-radius: 3px;
-        box-shadow: 0 0 5px #e0e0e0;
-        display: flex;
         justify-content: center;
-        align-items: center;
-        padding: 5px;
     }
     .user__notesBtnOut {
         width: 25px;
@@ -214,4 +209,28 @@
     }
 }
 @media(max-width: 450px) {
+    .users__tittle {
+        padding-top: 10px;
+        font-size: 25px;
+    }
+    .user__containerHeader {
+        font-size: 12px;
+    }
+    .user__container {
+        font-size: 12px;
+    }
+    .user__editWindow {
+        width: 100%;
+        left: 0;
+    }
+    .user_editInput {
+        width: 30%;
+        font-size: 16px;
+    }
+    .btnSuccess img,
+    .btnCancel img {
+        width: 25px;
+        height: 25px;
+        margin-left: 10px;
+    }
 }
