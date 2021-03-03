@@ -3,7 +3,8 @@ import {firebaseUserAPI } from "../firebase/firebase"
 import {clearNotesState, getNotes } from "./notes-reducer"
 import {ThunkAction} from "redux-thunk"
 import {AppStateType} from "./store-redux"
-import {UserType} from "../types/types";
+import {UserType} from "../types/types"
+import { initializeAC } from "./app-reducer"
 
 const NEW_SESSIONS: string = 'AUTH/NEW_SESSIONS'
 const REMOVE_SESSIONS: string = 'AUTH/REMOVE_SESSIONS'
@@ -64,7 +65,7 @@ const newSessionsAC = (id: string, firstName: string, lastName: string, email: s
 	{type: NEW_SESSIONS, id, firstName, lastName, email, role}
 )
 const removeSessionsAC = (): RemoveSessionsType => ({type: REMOVE_SESSIONS})
-export const toggleIsFetchingAC = (isFetching : boolean): ToggleIsFetchingType => ({type: TOGGLE_IS_FETCHING, isFetching})
+export const toggleIsFetchingAC = (isFetching: boolean): ToggleIsFetchingType => ({type: TOGGLE_IS_FETCHING, isFetching})
 
 const getUserProfile =  (userId: string, dispatch): void  => {
 	 firebaseUserAPI.getUserProfile(userId)
@@ -72,6 +73,7 @@ const getUserProfile =  (userId: string, dispatch): void  => {
 			let {email, firstName, lastName, role} = response.val()
 			dispatch(<ActionTypes>newSessionsAC(userId, firstName, lastName, email, role))
 			dispatch(getNotes(userId))
+			dispatch(initializeAC(true))
 		})
 }
 

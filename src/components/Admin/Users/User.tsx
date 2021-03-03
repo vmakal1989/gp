@@ -28,7 +28,7 @@ const User: React.FC<PropsType> = ({user, setShowNotes, getUserNotes}) => {
 				}}>
 				Show
 			</div>
-			{editUser && <UserEditWindow setEditUSer={setEditUSer} user={user}/>}
+			{editUser && <UserEditWindow setEditUSer={setEditUSer} user={user} />}
 		</div>
 	)
 }

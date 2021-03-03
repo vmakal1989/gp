@@ -1,7 +1,5 @@
 import React from 'react'
 import {getDaysOfTheMonth} from "../../helpers/getDays/getDays"
-import Day from "./Day/Day"
-import style from "./Calendar.module.css"
 import { useState } from 'react'
 import moment from 'moment'
 import {ElementsOfDayType} from "../../types/types";

@@ -5,8 +5,10 @@ import {authReducer} from "./auth-reducer"
 import thunk from 'redux-thunk'
 import { usersReducer } from './users-reducer'
 import { userNotesReducer } from './userNotes-reducer'
+import { appReducer } from './app-reducer'
 
 const rootReducer = combineReducers({
+    app: appReducer,
     notes: notesReducer,
     auth: authReducer,
     form: formReducer,
